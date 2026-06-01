@@ -6,8 +6,6 @@ import HourlyChart from '@/components/HourlyChart'
 import PollenStrip from '@/components/PollenStrip'
 import styles from './page.module.css'
 
-export const revalidate = 3600
-
 const CHART_COLORS = {
   pm2_5:            '#6366f1',
   pm10:             '#8b5cf6',
@@ -76,7 +74,7 @@ export default async function Page() {
 
       <footer className={styles.footer}>
         Data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>
-        {' '}(CAMS/SMHI) · Updated hourly
+        {' '}(CAMS/SMHI) · Updated hourly · <a href="/energy">Build energy ⚡</a>
       </footer>
     </main>
   )
