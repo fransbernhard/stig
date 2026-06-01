@@ -1,0 +1,74 @@
+name: CI energy
+on: [push, workflow_dispatch]
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v5
+        with:
+          task: start-measurement
+
+      - uses: actions/checkout@v4
+
+      - name: Measure checkout
+        uses: green-coding-solutions/eco-ci-energy-estimation@v5
+        with:
+          task: get-measurement
+          label: checkout
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Measure install
+        uses: green-coding-solutions/eco-ci-energy-estimation@v5
+        with:
+          task: get-measurement
+          label: npm install
+
+      - run: npm run build
+
+      - name: Measure build
+        uses: green-coding-solutions/eco-ci-energy-estimation@v5
+        with:
+          task: get-measurement
+          label: next build
+
+      - name: Display results
+        id: display-results
+        uses: green-coding-solutions/eco-ci-energy-estimation@v5
+        with:
+          task: display-results
+          json-output: "true"
+
+      - name: Save energy data
+        run: |
+          ENERGY_JOULES=$(awk '{print $1}' /tmp/eco-ci/energy-total.txt 2>/dev/null || echo "0")
+          DURATION=$(cat /tmp/eco-ci/timer-total.txt 2>/dev/null || echo "0")
+          CPU_UTIL=$(awk '{print $1}' /tmp/eco-ci/cpu-util-total.txt 2>/dev/null || echo "0")
+          ENERGY_MWH=$(echo "$ENERGY_JOULES * 0.000277778" | bc -l | xargs printf "%.4f")
+
+          cat > energy.json << EOF
+          {
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "run_id": "${{ github.run_number }}",
+            "energy_joules": $ENERGY_JOULES,
+            "energy_mwh": $ENERGY_MWH,
+            "duration_seconds": $DURATION,
+            "cpu_utilization": $CPU_UTIL,
+            "workflow_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF
+
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add energy.json
+          git diff --staged --quiet || git commit -m "chore: update energy metrics [skip ci]"
+          git push

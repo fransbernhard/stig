@@ -1,0 +1,58 @@
+.card {
+  background: var(--background);
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    border-color: #374151;
+  }
+}
+
+.label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.unit {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #9ca3af;
+}
+
+.barTrack {
+  height: 4px;
+  background: #f3f4f6;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .barTrack {
+    background: #374151;
+  }
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.who {
+  font-size: 0.68rem;
+  color: #d1d5db;
+}
