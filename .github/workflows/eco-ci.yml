@@ -50,22 +50,12 @@ jobs:
 
       - name: Save energy data
         run: |
-          ENERGY_JOULES=$(awk '{print $1}' /tmp/eco-ci/energy-total.txt 2>/dev/null || echo "0")
-          DURATION=$(cat /tmp/eco-ci/timer-total.txt 2>/dev/null || echo "0")
-          CPU_UTIL=$(awk '{print $1}' /tmp/eco-ci/cpu-util-total.txt 2>/dev/null || echo "0")
-          ENERGY_MWH=$(echo "$ENERGY_JOULES * 0.000277778" | bc -l | xargs printf "%.4f")
-
-          cat > energy.json << EOF
-          {
-            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "run_id": "${{ github.run_number }}",
-            "energy_joules": $ENERGY_JOULES,
-            "energy_mwh": $ENERGY_MWH,
-            "duration_seconds": $DURATION,
-            "cpu_utilization": $CPU_UTIL,
-            "workflow_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          }
-          EOF
+          jq \
+            --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --arg run "${{ github.run_number }}" \
+            --arg url "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            '. + {timestamp: $ts, run_id: $run, workflow_url: $url}' \
+            /tmp/eco-ci/total-data.json > energy.json
 
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
