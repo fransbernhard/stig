@@ -1,47 +1,47 @@
 .strip {
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  padding: 1.25rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.25rem 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
-  .strip {
-    border-color: #374151;
-  }
+    .strip {
+        border-color: #374151;
+    }
 }
 
 .heading {
-  font-size: 0.75rem;
-  color: #9ca3af;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
 }
 
 .items {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .item {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .name {
-  color: #6b7280;
+    color: #6b7280;
 }
 
 .lvl {
-  font-weight: 600;
+    font-weight: 600;
 }
