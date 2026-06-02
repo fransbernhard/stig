@@ -11,6 +11,7 @@ jobs:
         uses: green-coding-solutions/eco-ci-energy-estimation@v5
         with:
           task: start-measurement
+          json-output: "true"
 
       - uses: actions/checkout@v4
 
@@ -49,13 +50,14 @@ jobs:
           json-output: "true"
 
       - name: Save energy data
+        env:
+          TOTAL_JSON: ${{ steps.display-results.outputs.data-total-json }}
         run: |
-          jq \
+          echo "$TOTAL_JSON" | jq \
             --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --arg run "${{ github.run_number }}" \
             --arg url "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            '. + {timestamp: $ts, run_id: $run, workflow_url: $url}' \
-            /tmp/eco-ci/total-data.json > energy.json
+            '. + {timestamp: $ts, run_id: $run, workflow_url: $url}' > energy.json
 
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
