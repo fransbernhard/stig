@@ -44,16 +44,16 @@ export default function Page() {
 
     if (error) {
         return (
-            <main className={s.LuftPage}>
-                <p className={s['LuftPage__Error']}>Could not load air quality data. Try again later.</p>
+            <main className={s.AirPage}>
+                <p className={s['AirPage__Error']}>Kunde inte ladda luftkvalitetsdata. Prova igen senare.</p>
             </main>
         )
     }
 
     if (!data) {
         return (
-            <main className={s.LuftPage}>
-                <p className={s['LuftPage__Loading']}>Loading…</p>
+            <main className={s.AirPage}>
+                <p className={s['AirPage__Loading']}>Laddar…</p>
             </main>
         )
     }
@@ -68,48 +68,59 @@ export default function Page() {
         }))
 
     const updatedLabel = updatedAt
-        ? `Updated ${updatedAt.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}`
+        ? `Uppdaterad ${updatedAt.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}`
         : null
 
     return (
-        <main className={s.LuftPage}>
-            <AQIHero aqi={hourly.european_aqi?.[idx]} />
+        <main className={s.AirPage}>
+            <div className={s['AirPage__Left']}>
+                <AQIHero aqi={hourly.european_aqi?.[idx]} />
+            </div>
 
-            <section className={s['LuftPage__Grid']}>
-                {POLLUTANTS.map((p) => (
-                    <PollutantCard
-                        key={p.key}
-                        label={p.label}
-                        value={hourly[p.key]?.[idx]}
-                        unit={p.unit}
-                        who={p.who}
-                    />
-                ))}
-            </section>
+            <div className={s['AirPage__Right']}>
+                <section className={s['AirPage__Grid']}>
+                    {POLLUTANTS.map((p) => (
+                        <PollutantCard
+                            key={p.key}
+                            label={p.label}
+                            value={hourly[p.key]?.[idx]}
+                            unit={p.unit}
+                            who={p.who}
+                        />
+                    ))}
+                </section>
 
-            <PollenStrip hourly={hourly} idx={idx} />
+                <PollenStrip hourly={hourly} idx={idx} />
 
-            <section className={s['LuftPage__Charts']}>
-                {POLLUTANTS.slice(0, 4).map((p) => (
-                    <HourlyChart
-                        key={p.key}
-                        label={p.label}
-                        unit={p.unit}
-                        who={p.who}
-                        color={CHART_COLORS[p.key]}
-                        data={chartData(p.key)}
-                    />
-                ))}
-            </section>
+                <section className={s['AirPage__Charts']}>
+                    {POLLUTANTS.slice(0, 4).map((p) => (
+                        <HourlyChart
+                            key={p.key}
+                            label={p.label}
+                            unit={p.unit}
+                            who={p.who}
+                            color={CHART_COLORS[p.key]}
+                            data={chartData(p.key)}
+                        />
+                    ))}
+                </section>
 
-            <footer className={s['LuftPage__Footer']}>
-                Data:{' '}
-                <a href="https://open-meteo.com" target="_blank" rel="noopener">
-                    Open-Meteo
-                </a>{' '}
-                (CAMS/SMHI) · {updatedLabel} ·{' '}
-                <a href="/energy">Build energy ⚡</a>
-            </footer>
+                <footer className={s['AirPage__Footer']}>
+                    <p className={s['AirPage__FooterNote']}>
+                        Datan gäller en fast punkt i centrala Stockholm (59.33°N, 18.07°E) och är en
+                        modellprognos från CAMS (Copernicus). Det är inte ett medelvärde från stadens
+                        mätstationer — CAMS-modellens rutnät är ~10 km, så värdena speglar ett bredare
+                        område kring innerstaden, inte ett specifikt kvarter.
+                    </p>
+                    <p>
+                        Källa:{' '}
+                        <a href="https://open-meteo.com" target="_blank" rel="noopener">
+                            Open-Meteo
+                        </a>{' '}
+                        via CAMS · {updatedLabel}
+                    </p>
+                </footer>
+            </div>
         </main>
     )
 }
