@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { fetchDrinkingWaterData, DISPLAY_PARAMS } from '@/lib/drinking-water'
 import DrinkingWaterCard from '@/components/DrinkingWaterCard'
 import s from './page.module.scss'
@@ -25,7 +28,6 @@ function computeStatus(params) {
                 pct: d.valueNumeric !== null ? Math.round((d.valueNumeric / effectiveLimit) * 100) : null,
             })
         }
-        // hasNoLimit params are skipped — no pass/fail
     }
     const failing = results.filter((r) => !r.ok)
     return { allOk: failing.length === 0, failing, checked: results.length }
@@ -39,9 +41,9 @@ function ZoneSection({ report, zoneName }) {
 
     return (
         <section>
-            <div className={s['DricksvattenPage__ZoneHeader']}>
-                <h2 className={s['DricksvattenPage__ZoneName']}>{zoneName}</h2>
-                <div className={`${s['DricksvattenPage__HeroStatus']} ${status.allOk ? s['DricksvattenPage__HeroStatus--Ok'] : s['DricksvattenPage__HeroStatus--Warn']}`}>
+            <div className={s['DrinkingWaterPage__ZoneHeader']}>
+                <h2 className={s['DrinkingWaterPage__ZoneName']}>{zoneName}</h2>
+                <div className={`${s['DrinkingWaterPage__HeroStatus']} ${status.allOk ? s['DrinkingWaterPage__HeroStatus--Ok'] : s['DrinkingWaterPage__HeroStatus--Warn']}`}>
                     {status.allOk ? (
                         <span>Alla {status.checked} parametrar inom gränsvärden</span>
                     ) : (
@@ -53,7 +55,7 @@ function ZoneSection({ report, zoneName }) {
                 </div>
             </div>
 
-            <div className={s['DricksvattenPage__Grid']}>
+            <div className={s['DrinkingWaterPage__Grid']}>
                 {DISPLAY_PARAMS.map((p) => {
                     const d = report.params[p.key]
                     if (!d) return null
@@ -80,50 +82,52 @@ function ZoneSection({ report, zoneName }) {
     )
 }
 
-export default async function DricksvattenPage() {
-    let data = null
-    let error = null
+export default function DrinkingWaterPage() {
+    const [data, setData] = useState(null)
+    const [error, setError] = useState(null)
 
-    try {
-        data = await fetchDrinkingWaterData()
-    } catch (e) {
-        error = e.message
-    }
+    useEffect(() => {
+        fetchDrinkingWaterData()
+            .then(setData)
+            .catch((e) => setError(e.message))
+    }, [])
 
     const { sodra, nordvastra } = data ?? {}
     const primaryReport = sodra ?? nordvastra
     const hasData = primaryReport && Object.keys(primaryReport.params).length > 0
-
     const pubYear = primaryReport?.date ? parseInt(primaryReport.date.slice(0, 4)) : null
     const dataYear = pubYear ? pubYear - 1 : null
 
     return (
-        <main className={s.DricksvattenPage}>
-            <header className={s['DricksvattenPage__Header']}>
-                <h1 className={s['DricksvattenPage__Title']}>Dricksvatten i Stockholm</h1>
+        <main className={s.DrinkingWaterPage}>
+            <header className={s['DrinkingWaterPage__Header']}>
+                <h1 className={s['DrinkingWaterPage__Title']}>Dricksvatten i Stockholm</h1>
             </header>
 
-            {primaryReport?.date && (
-                <div className={s['DricksvattenPage__Notice']}>
-                    <span className={s['DricksvattenPage__NoticeIcon']}>🕐</span>
-                    <div>
-                        <strong>Årsmedelvärden {dataYear}</strong> — inte realtidsdata.
-                        Värdena är medelvärden från ~1 200 prover tagna under hela {dataYear}, publicerade {primaryReport.date}.
-                        Nästa uppdatering väntas mars/april {pubYear + 1}.
-                    </div>
-                </div>
-            )}
-
-            {error || !hasData ? (
-                <p className={s['DricksvattenPage__Empty']}>Kunde inte ladda dricksvattendata. Prova igen senare.</p>
+            {data === null && !error ? (
+                <p className={s['DrinkingWaterPage__Empty']}>Laddar…</p>
+            ) : error || !hasData ? (
+                <p className={s['DrinkingWaterPage__Empty']}>Kunde inte ladda dricksvattendata. Prova igen senare.</p>
             ) : (
-                <div className={s['DricksvattenPage__Zones']}>
-                    <ZoneSection report={sodra} zoneName="Södra Stockholm & Huddinge" />
-                    <ZoneSection report={nordvastra} zoneName="Nordvästra Stockholm" />
-                </div>
+                <>
+                    {primaryReport?.date && (
+                        <div className={s['DrinkingWaterPage__Notice']}>
+                            <span className={s['DrinkingWaterPage__NoticeIcon']}>🕐</span>
+                            <div>
+                                <strong>Årsmedelvärden {dataYear}</strong> — inte realtidsdata.
+                                Värdena är medelvärden från ~1 200 prover tagna under hela {dataYear}, publicerade {primaryReport.date}.
+                                Nästa uppdatering väntas mars/april {pubYear + 1}.
+                            </div>
+                        </div>
+                    )}
+                    <div className={s['DrinkingWaterPage__Zones']}>
+                        <ZoneSection report={sodra} zoneName="Södra Stockholm & Huddinge" />
+                        <ZoneSection report={nordvastra} zoneName="Nordvästra Stockholm" />
+                    </div>
+                </>
             )}
 
-            <footer className={s['DricksvattenPage__Footer']}>
+            <footer className={s['DrinkingWaterPage__Footer']}>
                 Data:{' '}
                 <a
                     href="https://www.stockholmvattenochavfall.se/kunskap/dricksvatten/vattenkvalitet/"

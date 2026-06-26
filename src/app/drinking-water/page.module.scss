@@ -1,6 +1,6 @@
 @use '../../styles/includes' as *;
 
-.DricksvattenPage {
+.DrinkingWaterPage {
     max-width: 960px;
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
@@ -9,18 +9,18 @@
     gap: 1.5rem;
 }
 
-.DricksvattenPage__Header {
+.DrinkingWaterPage__Header {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
 }
 
-.DricksvattenPage__Title {
+.DrinkingWaterPage__Title {
     font-size: 1.875rem;
     font-weight: 700;
 }
 
-.DricksvattenPage__Grid {
+.DrinkingWaterPage__Grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
@@ -34,7 +34,7 @@
     }
 }
 
-.DricksvattenPage__Notice {
+.DrinkingWaterPage__Notice {
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
@@ -51,26 +51,26 @@
     }
 }
 
-.DricksvattenPage__NoticeIcon {
+.DrinkingWaterPage__NoticeIcon {
     font-size: 1rem;
     flex-shrink: 0;
     margin-top: 0.05rem;
 }
 
-.DricksvattenPage__Zones {
+.DrinkingWaterPage__Zones {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
 }
 
-.DricksvattenPage__ZoneHeader {
+.DrinkingWaterPage__ZoneHeader {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     margin-bottom: 0.75rem;
 }
 
-.DricksvattenPage__ZoneName {
+.DrinkingWaterPage__ZoneName {
     font-size: 1rem;
     font-weight: 600;
     color: $color-muted;
@@ -78,7 +78,7 @@
     letter-spacing: 0.06em;
 }
 
-.DricksvattenPage__HeroStatus {
+.DrinkingWaterPage__HeroStatus {
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -117,12 +117,12 @@
     }
 }
 
-.DricksvattenPage__Empty {
+.DrinkingWaterPage__Empty {
     color: $color-muted;
     font-size: 0.9rem;
 }
 
-.DricksvattenPage__Footer {
+.DrinkingWaterPage__Footer {
     text-align: center;
     font-size: 0.72rem;
     color: $color-muted;

@@ -22,7 +22,7 @@ export default function EnergyDashboard({ data }) {
     return (
         <div className={s.EnergyDashboard}>
             <div className={s['EnergyDashboard__Meta']}>
-                <p>{new Date(data.timestamp).toLocaleString('sv-SE')}</p>
+                <p>{data.timestamp.replace('T', ' ').slice(0, 16)} UTC</p>
                 <a className={s['EnergyDashboard__Link']} href={data.workflow_url} target="_blank" rel="noopener">
                     Run #{data.run_id} ↗
                 </a>
