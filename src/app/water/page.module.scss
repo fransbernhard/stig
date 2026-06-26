@@ -1,0 +1,38 @@
+@use '../../styles/includes' as *;
+
+.WaterPage {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.WaterPage__Header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.WaterPage__Title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.WaterPage__Empty {
+    color: $color-muted;
+    font-size: 0.9rem;
+}
+
+.WaterPage__Footer {
+    text-align: center;
+    font-size: 0.72rem;
+    color: $color-muted;
+    margin-top: 1rem;
+
+    a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+}

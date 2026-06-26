@@ -1,0 +1,135 @@
+@use '../../styles/includes' as *;
+
+.DricksvattenPage {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.DricksvattenPage__Header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.DricksvattenPage__Title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.DricksvattenPage__Grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+
+    @include media-up($bp-sm) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-up($bp-lg) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.DricksvattenPage__Notice {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    background: rgba(156, 163, 175, 0.08);
+    border: 1px solid $border-dark;
+    border-radius: 0.75rem;
+    padding: 0.9rem 1rem;
+    font-size: 0.8rem;
+    color: $color-muted;
+    line-height: 1.5;
+
+    strong {
+        color: var(--foreground);
+    }
+}
+
+.DricksvattenPage__NoticeIcon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+}
+
+.DricksvattenPage__Zones {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.DricksvattenPage__ZoneHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.DricksvattenPage__ZoneName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.DricksvattenPage__HeroStatus {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    &--Ok {
+        background: rgba(74, 222, 128, 0.08);
+        border: 1px solid rgba(74, 222, 128, 0.25);
+        color: $color-success;
+
+        &::before {
+            background: $color-success;
+        }
+    }
+
+    &--Warn {
+        background: rgba(250, 204, 21, 0.08);
+        border: 1px solid rgba(250, 204, 21, 0.25);
+        color: $color-warning;
+
+        &::before {
+            background: $color-warning;
+        }
+    }
+}
+
+.DricksvattenPage__Empty {
+    color: $color-muted;
+    font-size: 0.9rem;
+}
+
+.DricksvattenPage__Footer {
+    text-align: center;
+    font-size: 0.72rem;
+    color: $color-muted;
+    margin-top: 1rem;
+
+    a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+}
