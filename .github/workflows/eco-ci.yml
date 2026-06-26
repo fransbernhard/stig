@@ -50,9 +50,9 @@ jobs:
 
       - name: Save energy data
         env:
-          CHECKOUT_JSON: ${{ steps.measure-checkout.outputs.data-measurement-json }}
-          INSTALL_JSON: ${{ steps.measure-install.outputs.data-measurement-json }}
-          BUILD_JSON: ${{ steps.measure-build.outputs.data-measurement-json }}
+          CHECKOUT_JSON: ${{ steps.measure-checkout.outputs.data-lap-json }}
+          INSTALL_JSON: ${{ steps.measure-install.outputs.data-lap-json }}
+          BUILD_JSON: ${{ steps.measure-build.outputs.data-lap-json }}
         run: |
           PREV_TOTAL=$(jq '[.steps[].energy_joules] | add // 0' energy.json 2>/dev/null || echo 0)
 
