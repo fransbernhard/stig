@@ -1,28 +1,81 @@
 @use '../../styles/includes' as *;
 
 .Nav {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
-    gap: 0.25rem;
+    position: sticky;
+    top: 0;
     z-index: 10;
+    background: #e17426;
+    border-bottom: 1px solid #c8631a;
+}
+
+.Nav__Container {
+    max-width: 1024px;
+    margin: 0 auto;
+    height: 52px;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Nav__Logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: opacity 0.15s;
+
+    &:hover {
+        opacity: 0.75;
+    }
+}
+
+.Nav__Links {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
 }
 
 .Nav__Link {
-    font-size: 0.75rem;
-    color: $color-muted;
-    padding: 0.3rem 0.6rem;
-    border-radius: 0.5rem;
-    transition: color 0.15s, background 0.15s;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 0.35rem 0.7rem;
+    border-radius: 0.4rem;
+    transition: color 0.2s;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0.7rem;
+        right: 0.7rem;
+        height: 1.5px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1px;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
     &:hover {
-        color: var(--foreground);
-        background: rgba(156, 163, 175, 0.1);
+        color: #fff;
+
+        &::after {
+            transform: scaleX(1);
+        }
     }
 
     &--Active {
-        color: var(--foreground);
-        font-weight: 600;
+        color: #fff;
+        font-weight: 500;
+
+        &::after {
+            transform: scaleX(1);
+        }
     }
 }
