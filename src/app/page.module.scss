@@ -1,0 +1,127 @@
+@use '../styles/includes' as *;
+
+.HomePage {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.HomePage__Header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 10rem;
+}
+
+.HomePage__Eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #3a3a3a;
+}
+
+.HomePage__Title {
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    color: #ededed;
+}
+
+.HomePage__TitleAccent {
+    color: #7ec880;
+}
+
+.HomePage__Subtitle {
+    font-size: 0.95rem;
+    color: #606060;
+    line-height: 1.6;
+    max-width: 38ch;
+}
+
+.HomePage__Grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: #1d1d1d;
+    border: 1px solid #1d1d1d;
+    border-radius: 0.6rem;
+    overflow: hidden;
+
+    @include media-up($bp-sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.HomePage__Card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1.4rem 1.5rem 1.5rem;
+    background: #111;
+    text-decoration: none;
+    color: inherit;
+    border-top: 2px solid var(--accent, #333);
+    transition: background 0.12s ease;
+    outline-offset: -2px;
+
+    &:hover {
+        background: #161616;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--accent, #555);
+    }
+
+    &:hover .HomePage__Arrow {
+        transform: translateX(4px);
+    }
+}
+
+.HomePage__CardMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.HomePage__Tag {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent, #666);
+}
+
+.HomePage__Arrow {
+    font-size: 0.9rem;
+    color: #3a3a3a;
+    transition: transform 0.12s ease;
+    line-height: 1;
+}
+
+.HomePage__CardTitle {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    letter-spacing: -0.01em;
+}
+
+.HomePage__CardDesc {
+    font-size: 0.8rem;
+    color: #5a5a5a;
+    line-height: 1.55;
+}
+
+.HomePage__Footer {
+    font-size: 0.68rem;
+    color: #333;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}

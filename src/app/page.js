@@ -1,116 +1,71 @@
-'use client'
+import Link from 'next/link'
+import s from './page.module.scss'
 
-import { useEffect, useState, useCallback } from 'react'
-import { fetchAirQuality, getCurrentHourIndex } from '@/lib/air-quality'
-import { POLLUTANTS } from '@/lib/aqi'
-import AQIHero from '@/components/AQIHero'
-import PollutantCard from '@/components/PollutantCard'
-import HourlyChart from '@/components/HourlyChart'
-import PollenStrip from '@/components/PollenStrip'
-import styles from './page.module.css'
+const SECTIONS = [
+    {
+        href: '/air',
+        title: 'Luftkvalitet',
+        tag: 'Realtid',
+        description: 'Aktuella halter av PM2.5, ozon, kvävedioxid och CO. Uppdateras automatiskt var 30:e minut.',
+        accent: '#818cf8',
+    },
+    {
+        href: '/water',
+        title: 'Badvatten',
+        tag: 'Säsong',
+        description: '45 badplatser i Stockholms kommun. Avrådan och vattenstatus från Havs- och vattenmyndigheten.',
+        accent: '#38bdf8',
+    },
+    {
+        href: '/drinking-water',
+        title: 'Dricksvatten',
+        tag: 'Årsdata',
+        description: 'Årsmedelvärden för 12 parametrar från Lovö och Norsborgs vattenverk — södra och nordvästra Stockholm.',
+        accent: '#4ade80',
+    },
+    {
+        href: '/energy',
+        title: 'Energianvändning',
+        tag: 'Per deploy',
+        description: 'Energiåtgång och CO₂-utsläpp från CI/CD-körningar. Mäts via eco-ci vid varje bygge.',
+        accent: '#fbbf24',
+    },
+]
 
-const REFRESH_INTERVAL_MS = 30 * 60 * 1000 // 30 minutes
-
-const CHART_COLORS = {
-    pm2_5: '#6366f1',
-    pm10: '#8b5cf6',
-    nitrogen_dioxide: '#f59e0b',
-    ozone: '#10b981',
-    sulphur_dioxide: '#ef4444',
-    carbon_monoxide: '#64748b',
-}
-
-export default function Page() {
-    const [data, setData] = useState(null)
-    const [error, setError] = useState(null)
-    const [updatedAt, setUpdatedAt] = useState(null)
-
-    const load = useCallback(async () => {
-        try {
-            const result = await fetchAirQuality()
-            setData(result)
-            setUpdatedAt(new Date())
-            setError(null)
-        } catch (e) {
-            setError(e.message)
-        }
-    }, [])
-
-    useEffect(() => {
-        load()
-        const timer = setInterval(load, REFRESH_INTERVAL_MS)
-        return () => clearInterval(timer)
-    }, [load])
-
-    if (error) {
-        return (
-            <main className={styles.main}>
-                <p className={styles.error}>
-                    Could not load air quality data. Try again later.
-                </p>
-            </main>
-        )
-    }
-
-    if (!data) {
-        return (
-            <main className={styles.main}>
-                <p className={styles.loading}>Loading…</p>
-            </main>
-        )
-    }
-
-    const { hourly } = data
-    const idx = getCurrentHourIndex(hourly.time)
-
-    const chartData = (key) =>
-        hourly.time.map((t, i) => ({
-            hour: t.slice(11, 13),
-            value: hourly[key]?.[i] ?? null,
-        }))
-
-    const updatedLabel = updatedAt
-        ? `Updated ${updatedAt.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}`
-        : null
-
+export default function HomePage() {
     return (
-        <main className={styles.main}>
-            <AQIHero aqi={hourly.european_aqi?.[idx]} />
+        <main className={s.HomePage}>
+            <header className={s['HomePage__Header']}>
+                <p className={s['HomePage__Eyebrow']}>STIG</p>
+                <h1 className={s['HomePage__Title']}>
+                    Stockholm<br />
+                    <span className={s['HomePage__TitleAccent']}>Miljödata</span>
+                </h1>
+                <p className={s['HomePage__Subtitle']}>
+                    Öppen data om luft, vatten och energi i Stockholm — samlat på ett ställe.
+                </p>
+            </header>
 
-            <section className={styles.grid}>
-                {POLLUTANTS.map((p) => (
-                    <PollutantCard
-                        key={p.key}
-                        label={p.label}
-                        value={hourly[p.key]?.[idx]}
-                        unit={p.unit}
-                        who={p.who}
-                    />
+            <div className={s['HomePage__Grid']}>
+                {SECTIONS.map((section) => (
+                    <Link
+                        key={section.href}
+                        href={section.href}
+                        className={s['HomePage__Card']}
+                        style={{ '--accent': section.accent }}
+                    >
+                        <div className={s['HomePage__CardMeta']}>
+                            <span className={s['HomePage__Tag']}>{section.tag}</span>
+                            <span className={s['HomePage__Arrow']} aria-hidden="true">→</span>
+                        </div>
+                        <h2 className={s['HomePage__CardTitle']}>{section.title}</h2>
+                        <p className={s['HomePage__CardDesc']}>{section.description}</p>
+                    </Link>
                 ))}
-            </section>
+            </div>
 
-            <PollenStrip hourly={hourly} idx={idx} />
-
-            <section className={styles.charts}>
-                {POLLUTANTS.slice(0, 4).map((p) => (
-                    <HourlyChart
-                        key={p.key}
-                        label={p.label}
-                        unit={p.unit}
-                        who={p.who}
-                        color={CHART_COLORS[p.key]}
-                        data={chartData(p.key)}
-                    />
-                ))}
-            </section>
-
-            <footer className={styles.footer}>
-                Data:{' '}
-                <a href="https://open-meteo.com" target="_blank" rel="noopener">
-                    Open-Meteo
-                </a>{' '}
-                (CAMS/SMHI) · {updatedLabel} ·{' '}
-                <a href="/energy">Build energy ⚡</a>
+            <footer className={s['HomePage__Footer']}>
+                Data från SMHI, Havs- och vattenmyndigheten, Stockholm Vatten och Avfall samt eco-ci
             </footer>
         </main>
     )
