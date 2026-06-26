@@ -1,0 +1,26 @@
+@use '../../styles/includes' as *;
+
+.EnergyPage {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.EnergyPage__Header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.EnergyPage__Title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.EnergyPage__Empty {
+    color: $color-muted;
+    font-size: 0.9rem;
+}

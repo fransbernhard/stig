@@ -1,0 +1,134 @@
+@use '../../styles/includes' as *;
+
+.EnergyDashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.EnergyDashboard__Meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: $color-muted;
+}
+
+.EnergyDashboard__Link {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.EnergyDashboard__Totals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.EnergyDashboard__Stat {
+    border: 1px solid $border-light;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    @include dark {
+        border-color: $border-dark;
+    }
+}
+
+.EnergyDashboard__StatValue {
+    font-size: 1.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.EnergyDashboard__Delta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.15em 0.45em;
+    border-radius: 0.4em;
+
+    &--Up {
+        color: #ef4444;
+        background: #fef2f2;
+
+        @include dark {
+            background: #450a0a;
+        }
+    }
+
+    &--Down {
+        color: #22c55e;
+        background: #f0fdf4;
+
+        @include dark {
+            background: #052e16;
+        }
+    }
+}
+
+.EnergyDashboard__StatLabel {
+    font-size: 0.72rem;
+    color: $color-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.EnergyDashboard__Chart {
+    border: 1px solid $border-light;
+    border-radius: 1rem;
+    padding: 1.25rem 1rem 0.75rem;
+
+    @include dark {
+        border-color: $border-dark;
+    }
+}
+
+.EnergyDashboard__ChartTitle {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: $color-muted;
+    margin-bottom: 0.5rem;
+}
+
+.EnergyDashboard__Table {
+    border: 1px solid $border-light;
+    border-radius: 1rem;
+    overflow: hidden;
+    font-size: 0.82rem;
+
+    @include dark {
+        border-color: $border-dark;
+    }
+}
+
+.EnergyDashboard__Row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #f3f4f6;
+
+    @include dark {
+        border-color: #1f2937;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &--Head {
+        font-size: 0.7rem;
+        color: $color-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: #f9fafb;
+
+        @include dark {
+            background: #111827;
+        }
+    }
+}

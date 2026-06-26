@@ -9,25 +9,16 @@ import {
     ResponsiveContainer,
     ReferenceLine,
 } from 'recharts'
-import styles from './HourlyChart.module.css'
+import s from './HourlyChart.module.scss'
 
-export default function HourlyChart({
-    data,
-    color = '#6366f1',
-    label,
-    unit,
-    who,
-}) {
+export default function HourlyChart({ data, color = '#6366f1', label, unit, who }) {
     return (
-        <div className={styles.wrapper}>
-            <p className={styles.title}>
-                {label} <span className={styles.unit}>({unit})</span>
+        <div className={s.HourlyChart}>
+            <p className={s['HourlyChart__Title']}>
+                {label} <span className={s['HourlyChart__Unit']}>({unit})</span>
             </p>
             <ResponsiveContainer width="100%" height={120}>
-                <LineChart
-                    data={data}
-                    margin={{ top: 8, right: 8, left: -24, bottom: 0 }}
-                >
+                <LineChart data={data} margin={{ top: 8, right: 8, left: -24, bottom: 0 }}>
                     <XAxis
                         dataKey="hour"
                         tick={{ fontSize: 10, fill: '#9ca3af' }}
@@ -41,21 +32,11 @@ export default function HourlyChart({
                         axisLine={false}
                     />
                     <Tooltip
-                        contentStyle={{
-                            fontSize: 12,
-                            borderRadius: 8,
-                            border: '1px solid #e5e7eb',
-                        }}
+                        contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e5e7eb' }}
                         formatter={(v) => [`${v?.toFixed(1)} ${unit}`, label]}
                         labelFormatter={(l) => `${l}:00`}
                     />
-                    {who && (
-                        <ReferenceLine
-                            y={who}
-                            stroke="#f87171"
-                            strokeDasharray="4 2"
-                        />
-                    )}
+                    {who && <ReferenceLine y={who} stroke="#f87171" strokeDasharray="4 2" />}
                     <Line
                         type="monotone"
                         dataKey="value"

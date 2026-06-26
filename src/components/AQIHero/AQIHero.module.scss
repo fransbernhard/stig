@@ -1,4 +1,6 @@
-.hero {
+@use '../../styles/includes' as *;
+
+.AQIHero {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,15 +10,15 @@
     transition: background 0.4s ease;
 }
 
-.city {
+.AQIHero__City {
     font-size: 0.85rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #6b7280;
+    color: $color-muted;
     margin-bottom: 1.25rem;
 }
 
-.circle {
+.AQIHero__Circle {
     width: 140px;
     height: 140px;
     border-radius: 50%;
@@ -28,26 +30,26 @@
     margin-bottom: 1.25rem;
 }
 
-.value {
+.AQIHero__Value {
     font-size: 2.75rem;
     font-weight: 700;
     line-height: 1;
 }
 
-.unit {
+.AQIHero__Unit {
     font-size: 0.7rem;
-    color: #9ca3af;
+    color: $color-muted;
     letter-spacing: 0.08em;
     margin-top: 2px;
 }
 
-.label {
+.AQIHero__Label {
     font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
 
-.sub {
+.AQIHero__Sub {
     font-size: 0.8rem;
-    color: #9ca3af;
+    color: $color-muted;
 }

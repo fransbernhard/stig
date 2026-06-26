@@ -1,0 +1,68 @@
+@use '../../styles/includes' as *;
+
+.WaterList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.WaterList__SearchRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.WaterList__Search {
+    flex: 1;
+    background: var(--background);
+    border: 1px solid $border-dark;
+    border-radius: 0.6rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.88rem;
+    color: var(--foreground);
+    outline: none;
+    transition: border-color 0.15s;
+
+    &::placeholder {
+        color: #6b7280;
+    }
+
+    &:focus {
+        border-color: #6b7280;
+    }
+
+    &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+    }
+}
+
+.WaterList__Meta {
+    font-size: 0.72rem;
+    color: $color-muted;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.WaterList__AdvisoryBadge {
+    color: $color-error;
+}
+
+.WaterList__Grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+
+    @include media-up($bp-md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-up($bp-lg) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.WaterList__Empty {
+    color: $color-muted;
+    font-size: 0.88rem;
+    padding: 1rem 0;
+}

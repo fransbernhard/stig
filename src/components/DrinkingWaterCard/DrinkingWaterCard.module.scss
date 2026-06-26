@@ -1,0 +1,80 @@
+@use '../../styles/includes' as *;
+
+.DrinkingWaterCard {
+    background: var(--background);
+    border: 1px solid $border-light;
+    border-radius: 1rem;
+    padding: 1.1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    @include dark {
+        border-color: $border-dark;
+    }
+}
+
+.DrinkingWaterCard__Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.DrinkingWaterCard__Label {
+    font-size: 0.75rem;
+    color: $color-muted;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.DrinkingWaterCard__Category {
+    font-size: 0.6rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.DrinkingWaterCard__Value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.DrinkingWaterCard__Unit {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: $color-muted;
+}
+
+.DrinkingWaterCard__BarTrack {
+    height: 4px;
+    background: #f3f4f6;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.25rem;
+
+    @include dark {
+        background: $border-dark;
+    }
+}
+
+.DrinkingWaterCard__BarFill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+.DrinkingWaterCard__PctLabel {
+    font-size: 0.65rem;
+    color: #6b7280;
+    margin-top: -0.1rem;
+}
+
+.DrinkingWaterCard__Limit {
+    font-size: 0.68rem;
+    color: #6b7280;
+    margin-top: 0.1rem;
+}

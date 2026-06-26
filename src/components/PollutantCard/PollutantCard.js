@@ -1,28 +1,28 @@
 'use client'
 
-import styles from './PollutantCard.module.css'
+import s from './PollutantCard.module.scss'
 
 export default function PollutantCard({ label, value, unit, who }) {
     const pct = who ? Math.min((value / who) * 100, 100) : 0
     const barColor = pct < 50 ? '#4ade80' : pct < 80 ? '#facc15' : '#f87171'
 
     return (
-        <div className={styles.card}>
-            <p className={styles.label}>{label}</p>
-            <p className={styles.value}>
+        <div className={s.PollutantCard}>
+            <p className={s['PollutantCard__Label']}>{label}</p>
+            <p className={s['PollutantCard__Value']}>
                 {value != null ? value.toFixed(1) : '—'}
-                <span className={styles.unit}> {unit}</span>
+                <span className={s['PollutantCard__Unit']}> {unit}</span>
             </p>
             {who && (
-                <div className={styles.barTrack}>
+                <div className={s['PollutantCard__BarTrack']}>
                     <div
-                        className={styles.barFill}
+                        className={s['PollutantCard__BarFill']}
                         style={{ width: `${pct}%`, background: barColor }}
                     />
                 </div>
             )}
             {who && (
-                <p className={styles.who}>
+                <p className={s['PollutantCard__Who']}>
                     WHO guideline: {who} {unit}
                 </p>
             )}

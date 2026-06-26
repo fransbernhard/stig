@@ -1,0 +1,72 @@
+@use '../../styles/includes' as *;
+
+.WaterCard {
+    $root: &;
+    background: var(--background);
+    border: 1px solid $border-light;
+    border-left: 4px solid transparent;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    @include dark {
+        border-color: $border-dark;
+        border-left-color: transparent;
+    }
+
+    &--Ok {
+        border-left-color: $color-success;
+    }
+
+    &--Warn {
+        border-left-color: $color-error;
+    }
+}
+
+.WaterCard__Top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.WaterCard__Name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.WaterCard__Type {
+    font-size: 0.65rem;
+    color: $color-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.WaterCard__Safe {
+    font-size: 0.75rem;
+    color: $color-success;
+}
+
+.WaterCard__Advisory {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.WaterCard__AdvisoryText {
+    font-size: 0.75rem;
+    color: $color-error;
+}
+
+.WaterCard__Abnormal {
+    font-size: 0.7rem;
+    color: $color-muted;
+    font-style: italic;
+    margin-top: 0.1rem;
+}

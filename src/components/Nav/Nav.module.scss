@@ -1,0 +1,28 @@
+@use '../../styles/includes' as *;
+
+.Nav {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.25rem;
+    z-index: 10;
+}
+
+.Nav__Link {
+    font-size: 0.75rem;
+    color: $color-muted;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+    transition: color 0.15s, background 0.15s;
+
+    &:hover {
+        color: var(--foreground);
+        background: rgba(156, 163, 175, 0.1);
+    }
+
+    &--Active {
+        color: var(--foreground);
+        font-weight: 600;
+    }
+}

@@ -1,0 +1,13 @@
+@use 'variables' as *;
+
+@mixin media-up($bp) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
+@mixin dark {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
