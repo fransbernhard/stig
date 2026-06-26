@@ -1,9 +1,9 @@
 import s from './DrinkingWaterCard.module.scss'
 
 function barColor(p) {
-    if (p < 50) return '#4ade80'
-    if (p < 80) return '#facc15'
-    return '#f87171'
+    if (p < 50) return '#15803d'
+    if (p < 80) return '#e17426'
+    return '#b91c1c'
 }
 
 export default function DrinkingWaterCard({
@@ -19,7 +19,7 @@ export default function DrinkingWaterCard({
                     <p className={s['DrinkingWaterCard__Label']}>{label}</p>
                     <span className={s['DrinkingWaterCard__Category']}>{category}</span>
                 </div>
-                <p className={s['DrinkingWaterCard__Value']} style={{ color: notDetected ? '#4ade80' : '#f87171' }}>
+                <p className={s['DrinkingWaterCard__Value']} style={{ color: notDetected ? '#15803d' : '#f87171' }}>
                     {notDetected ? 'Ej påvisad' : 'Påvisad'}
                 </p>
                 <p className={s['DrinkingWaterCard__Limit']}>Gränsvärde: får ej påvisas</p>
@@ -38,7 +38,7 @@ export default function DrinkingWaterCard({
                     <p className={s['DrinkingWaterCard__Label']}>{label}</p>
                     <span className={s['DrinkingWaterCard__Category']}>{category}</span>
                 </div>
-                <p className={s['DrinkingWaterCard__Value']} style={{ color: inRange ? '#4ade80' : '#f87171' }}>
+                <p className={s['DrinkingWaterCard__Value']} style={{ color: inRange ? '#15803d' : '#f87171' }}>
                     {valueRaw ?? '—'}
                     {unit && <span className={s['DrinkingWaterCard__Unit']}> {unit}</span>}
                 </p>

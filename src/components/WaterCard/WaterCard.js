@@ -13,7 +13,7 @@ export default function WaterCard({ bathingWater, adviceAgainstBathing, abnormal
             {hasAdvisory ? (
                 <div className={s['WaterCard__Advisory']}>
                     {adviceAgainstBathing.map((a, i) => (
-                        <p key={i} className={s['WaterCard__AdvisoryText']}>⚠ {a.typeIdText}</p>
+                        <p key={i} className={s['WaterCard__AdvisoryText']}>{a.typeIdText}</p>
                     ))}
                 </div>
             ) : (

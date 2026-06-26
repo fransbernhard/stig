@@ -1,27 +1,22 @@
 @use '../../styles/includes' as *;
 
 .WaterCard {
-    $root: &;
-    background: var(--background);
+    background: var(--surface);
     border: 1px solid $border-light;
-    border-left: 4px solid transparent;
-    border-radius: 1rem;
-    padding: 1rem;
+    border-radius: 0.875rem;
+    padding: 1rem 1.1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.45rem;
+    box-shadow: 0 1px 3px rgba(26, 20, 16, 0.04);
 
-    @include dark {
-        border-color: $border-dark;
-        border-left-color: transparent;
+    &--Warn {
+        background: #fff5f5;
+        border-color: #fca5a5;
     }
 
     &--Ok {
-        border-left-color: $color-success;
-    }
-
-    &--Warn {
-        border-left-color: $color-error;
+        // inherits defaults
     }
 }
 
@@ -33,40 +28,70 @@
 }
 
 .WaterCard__Name {
-    font-size: 0.88rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .WaterCard__Type {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: $color-muted;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.07em;
     white-space: nowrap;
     flex-shrink: 0;
+    background: var(--background);
+    border: 1px solid $border-light;
+    border-radius: 0.3rem;
+    padding: 0.15em 0.45em;
     margin-top: 0.1rem;
 }
 
 .WaterCard__Safe {
     font-size: 0.75rem;
     color: $color-success;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+    }
 }
 
 .WaterCard__Advisory {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.2rem;
 }
 
 .WaterCard__AdvisoryText {
     font-size: 0.75rem;
+    font-weight: 500;
     color: $color-error;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+    }
 }
 
 .WaterCard__Abnormal {
     font-size: 0.7rem;
     color: $color-muted;
     font-style: italic;
-    margin-top: 0.1rem;
 }

@@ -1,17 +1,14 @@
 @use '../../styles/includes' as *;
 
 .DrinkingWaterCard {
-    background: var(--background);
+    background: var(--surface);
     border: 1px solid $border-light;
-    border-radius: 1rem;
-    padding: 1.1rem 1rem;
+    border-radius: 0.875rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-
-    @include dark {
-        border-color: $border-dark;
-    }
+    box-shadow: 0 1px 3px rgba(26, 35, 24, 0.04);
 }
 
 .DrinkingWaterCard__Header {
@@ -19,46 +16,48 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 0.5rem;
+    margin-bottom: 0.15rem;
 }
 
 .DrinkingWaterCard__Label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: $color-muted;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    font-weight: 500;
 }
 
 .DrinkingWaterCard__Category {
-    font-size: 0.6rem;
-    color: #6b7280;
+    font-size: 0.58rem;
+    color: $color-muted;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     white-space: nowrap;
     flex-shrink: 0;
+    background: var(--background);
+    border: 1px solid $border-light;
+    border-radius: 0.3rem;
+    padding: 0.15em 0.45em;
 }
 
 .DrinkingWaterCard__Value {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    line-height: 1.1;
+    line-height: 1.15;
 }
 
 .DrinkingWaterCard__Unit {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 400;
     color: $color-muted;
 }
 
 .DrinkingWaterCard__BarTrack {
-    height: 4px;
-    background: #f3f4f6;
+    height: 3px;
+    background: $border-light;
     border-radius: 2px;
     overflow: hidden;
-    margin-top: 0.25rem;
-
-    @include dark {
-        background: $border-dark;
-    }
+    margin-top: 0.35rem;
 }
 
 .DrinkingWaterCard__BarFill {
@@ -68,13 +67,13 @@
 }
 
 .DrinkingWaterCard__PctLabel {
-    font-size: 0.65rem;
-    color: #6b7280;
-    margin-top: -0.1rem;
+    font-size: 0.62rem;
+    color: $color-muted;
+    margin-top: 0.1rem;
 }
 
 .DrinkingWaterCard__Limit {
-    font-size: 0.68rem;
-    color: #6b7280;
+    font-size: 0.65rem;
+    color: $color-muted;
     margin-top: 0.1rem;
 }

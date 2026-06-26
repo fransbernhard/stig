@@ -1,32 +1,59 @@
 @use '../../styles/includes' as *;
 
-.LuftPage {
-    max-width: 480px;
+.AirPage {
+    max-width: 960px;
     margin: 0 auto;
-    padding: 1.5rem 1rem 3rem;
+    padding: 2rem 1.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @include media-up($bp-lg) {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 2.5rem;
+        align-items: start;
+    }
+}
+
+.AirPage__Left {
+    @include media-up($bp-lg) {
+        position: sticky;
+        top: calc(54px + 2rem);
+    }
+}
+
+.AirPage__Right {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    min-width: 0;
 }
 
-.LuftPage__Grid {
+.AirPage__Grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 0.65rem;
+
+    @include media-up($bp-md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-.LuftPage__Charts {
+.AirPage__Charts {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.65rem;
     margin-top: 0.25rem;
 }
 
-.LuftPage__Footer {
-    text-align: center;
+.AirPage__Footer {
     font-size: 0.72rem;
     color: $color-muted;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 
     a {
         text-decoration: underline;
@@ -34,14 +61,17 @@
     }
 }
 
-.LuftPage__Error {
-    text-align: center;
+.AirPage__FooterNote {
+    line-height: 1.55;
+    max-width: 52ch;
+}
+
+.AirPage__Error {
     color: $color-error;
     padding: 2rem;
 }
 
-.LuftPage__Loading {
-    text-align: center;
+.AirPage__Loading {
     color: $color-muted;
     padding: 4rem 2rem;
     font-size: 0.9rem;

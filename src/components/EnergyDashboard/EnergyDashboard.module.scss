@@ -32,10 +32,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
-
-    @include dark {
-        border-color: $border-dark;
-    }
 }
 
 .EnergyDashboard__StatValue {
@@ -55,19 +51,11 @@
     &--Up {
         color: #ef4444;
         background: #fef2f2;
-
-        @include dark {
-            background: #450a0a;
-        }
     }
 
     &--Down {
         color: #22c55e;
         background: #f0fdf4;
-
-        @include dark {
-            background: #052e16;
-        }
     }
 }
 
@@ -82,10 +70,6 @@
     border: 1px solid $border-light;
     border-radius: 1rem;
     padding: 1.25rem 1rem 0.75rem;
-
-    @include dark {
-        border-color: $border-dark;
-    }
 }
 
 .EnergyDashboard__ChartTitle {
@@ -100,10 +84,6 @@
     border-radius: 1rem;
     overflow: hidden;
     font-size: 0.82rem;
-
-    @include dark {
-        border-color: $border-dark;
-    }
 }
 
 .EnergyDashboard__Row {
@@ -111,10 +91,6 @@
     grid-template-columns: 2fr 1fr 1fr 1fr;
     padding: 0.6rem 1rem;
     border-bottom: 1px solid #f3f4f6;
-
-    @include dark {
-        border-color: #1f2937;
-    }
 
     &:last-child {
         border-bottom: none;
@@ -126,9 +102,5 @@
         text-transform: uppercase;
         letter-spacing: 0.05em;
         background: #f9fafb;
-
-        @include dark {
-            background: #111827;
-        }
     }
 }

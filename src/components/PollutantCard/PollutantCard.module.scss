@@ -1,29 +1,28 @@
 @use '../../styles/includes' as *;
 
 .PollutantCard {
-    background: var(--background);
+    background: var(--surface);
     border: 1px solid $border-light;
-    border-radius: 1rem;
-    padding: 1.25rem 1rem;
+    border-radius: 0.875rem;
+    padding: 1.1rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-
-    @include dark {
-        border-color: $border-dark;
-    }
+    gap: 0.25rem;
+    box-shadow: 0 1px 3px rgba(26, 35, 24, 0.04);
 }
 
 .PollutantCard__Label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: $color-muted;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    font-weight: 500;
 }
 
 .PollutantCard__Value {
     font-size: 1.5rem;
     font-weight: 600;
+    line-height: 1.15;
 }
 
 .PollutantCard__Unit {
@@ -33,15 +32,11 @@
 }
 
 .PollutantCard__BarTrack {
-    height: 4px;
-    background: #f3f4f6;
+    height: 3px;
+    background: $border-light;
     border-radius: 2px;
     overflow: hidden;
-    margin-top: 0.4rem;
-
-    @include dark {
-        background: $border-dark;
-    }
+    margin-top: 0.5rem;
 }
 
 .PollutantCard__BarFill {
@@ -51,6 +46,7 @@
 }
 
 .PollutantCard__Who {
-    font-size: 0.68rem;
-    color: #d1d5db;
+    font-size: 0.65rem;
+    color: $color-muted;
+    margin-top: 0.1rem;
 }
