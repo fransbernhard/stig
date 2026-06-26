@@ -6,7 +6,7 @@ import s from './EnergyDashboard.module.scss'
 const STEP_COLORS = ['#6366f1', '#8b5cf6', '#a78bfa']
 
 export default function EnergyDashboard({ data }) {
-    const steps = data.steps ?? []
+    const steps = (data.steps ?? []).filter(Boolean)
     const totalEnergy = steps.reduce((sum, step) => sum + parseFloat(step.energy_joules || 0), 0)
     const totalTime = steps.reduce((sum, step) => sum + parseFloat(step.time || 0), 0)
 
