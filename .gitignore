@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/water
 
 # next.js
 /.next/
