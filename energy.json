@@ -1,22 +1,23 @@
 {
-  "timestamp": "2026-07-01T12:35:18Z",
-  "run_id": "18",
-  "workflow_url": "https://github.com/fransbernhard/stig/actions/runs/28517869480",
-  "previous_total_joules": 151.1157,
+  "timestamp": "2026-07-01T12:56:28Z",
+  "run_id": "19",
+  "workflow_url": "https://github.com/fransbernhard/stig/actions/runs/28519090918",
+  "previous_total_joules": 135.6904,
+  "grid_carbon_intensity_gco2_kwh": null,
   "steps": [
     {
       "label": "npm install",
-      "cpu_avg_percent": "33.7345",
-      "energy_joules": "76.9116",
-      "power_avg_watts": "4.58",
-      "time": "16.81"
+      "cpu_avg_percent": "48.9611",
+      "energy_joules": "65.9313",
+      "power_avg_watts": "5.14",
+      "time": "12.82"
     },
     {
       "label": "next build",
-      "cpu_avg_percent": "69.03",
-      "energy_joules": "58.7788",
-      "power_avg_watts": "6.45",
-      "time": "9.11"
+      "cpu_avg_percent": "78.9889",
+      "energy_joules": "64.2075",
+      "power_avg_watts": "6.95",
+      "time": "9.24"
     }
   ]
 }
