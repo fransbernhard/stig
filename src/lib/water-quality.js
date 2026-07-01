@@ -1,7 +1,13 @@
 const BASE_URL = 'https://gw.havochvatten.se/external-public/bathing-waters/v2'
 
 export async function fetchStockholmWaterQuality() {
-    const res = await fetch(`${BASE_URL}/bathing-waters`, { next: { revalidate: 3600 } })
+    const res = await fetch(`${BASE_URL}/bathing-waters`, {
+        next: { revalidate: 3600 },
+        headers: {
+            'Accept': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (compatible; stig/1.0)',
+        },
+    })
     if (!res.ok) throw new Error(`Waters ${res.status}`)
     const { watersAndAdvisories } = await res.json()
 
