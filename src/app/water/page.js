@@ -1,19 +1,20 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { fetchStockholmWaterQuality } from '@/lib/water-quality'
 import WaterList from '@/components/WaterList'
 import s from './page.module.scss'
 
-export const revalidate = 3600
-export const preferredRegion = 'arn1'
+export default function WaterPage() {
+    const [sites, setSites] = useState([])
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(true)
 
-export default async function WaterPage() {
-    let sites = []
-    let error = null
-
-    try {
-        sites = await fetchStockholmWaterQuality()
-    } catch (e) {
-        error = e.message
-    }
+    useEffect(() => {
+        fetchStockholmWaterQuality()
+            .then((data) => { setSites(data); setLoading(false) })
+            .catch((e) => { setError(e.message); setLoading(false) })
+    }, [])
 
     return (
         <main className={s.WaterPage}>
@@ -21,7 +22,9 @@ export default async function WaterPage() {
                 <h1 className={s['WaterPage__Title']}>Badplatser i Stockholm</h1>
             </header>
 
-            {error ? (
+            {loading ? (
+                <p className={s['WaterPage__Empty']}>Laddar…</p>
+            ) : error ? (
                 <p className={s['WaterPage__Empty']}>Kunde inte ladda badvattensdata. Prova igen senare.</p>
             ) : sites.length === 0 ? (
                 <p className={s['WaterPage__Empty']}>Ingen data tillgänglig för tillfället.</p>
