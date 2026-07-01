@@ -132,13 +132,6 @@ async function parsePdf(url) {
 }
 
 export async function fetchDrinkingWaterData() {
-    if (typeof window !== 'undefined') {
-        const base = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
-        const res = await fetch(`${base}/data/drinking-water.json`)
-        if (!res.ok) throw new Error(`Cache ${res.status}`)
-        return res.json()
-    }
-
     const [sodra, nordvastra] = await Promise.all([
         parsePdf(PDF_URLS.sodra).catch(() => null),
         parsePdf(PDF_URLS.nordvastra).catch(() => null),

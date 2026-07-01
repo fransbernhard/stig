@@ -1,6 +1,3 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { fetchDrinkingWaterData, DISPLAY_PARAMS } from '@/lib/drinking-water'
 import DrinkingWaterCard from '@/components/DrinkingWaterCard'
 import s from './page.module.scss'
@@ -82,15 +79,17 @@ function ZoneSection({ report, zoneName }) {
     )
 }
 
-export default function DrinkingWaterPage() {
-    const [data, setData] = useState(null)
-    const [error, setError] = useState(null)
+export const revalidate = 86400
 
-    useEffect(() => {
-        fetchDrinkingWaterData()
-            .then(setData)
-            .catch((e) => setError(e.message))
-    }, [])
+export default async function DrinkingWaterPage() {
+    let data = null
+    let error = null
+
+    try {
+        data = await fetchDrinkingWaterData()
+    } catch (e) {
+        error = e.message
+    }
 
     const { sodra, nordvastra } = data ?? {}
     const primaryReport = sodra ?? nordvastra
@@ -104,9 +103,7 @@ export default function DrinkingWaterPage() {
                 <h1 className={s['DrinkingWaterPage__Title']}>Dricksvatten i Stockholm</h1>
             </header>
 
-            {data === null && !error ? (
-                <p className={s['DrinkingWaterPage__Empty']}>Laddar…</p>
-            ) : error || !hasData ? (
+            {error || !hasData ? (
                 <p className={s['DrinkingWaterPage__Empty']}>Kunde inte ladda dricksvattendata. Prova igen senare.</p>
             ) : (
                 <>
