@@ -3,6 +3,7 @@ import WaterList from '@/components/WaterList'
 import s from './page.module.scss'
 
 export const revalidate = 3600
+export const preferredRegion = 'arn1'
 
 export default async function WaterPage() {
     let sites = []

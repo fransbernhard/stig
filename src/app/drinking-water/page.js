@@ -80,6 +80,7 @@ function ZoneSection({ report, zoneName }) {
 }
 
 export const revalidate = 86400
+export const preferredRegion = 'arn1'
 
 export default async function DrinkingWaterPage() {
     let data = null
