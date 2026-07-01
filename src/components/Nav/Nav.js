@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import CarbonBadge from '@/components/CarbonBadge/CarbonBadge'
 import s from './Nav.module.scss'
 
 const LINKS = [
@@ -59,6 +60,7 @@ export default function Nav() {
                             </Link>
                         )
                     })}
+                    <CarbonBadge />
                 </nav>
             </div>
         </header>

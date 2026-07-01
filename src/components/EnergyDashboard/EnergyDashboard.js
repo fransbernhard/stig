@@ -44,6 +44,12 @@ export default function EnergyDashboard({ data }) {
                     <span className={s['EnergyDashboard__StatValue']}>{totalTime.toFixed(1)}</span>
                     <span className={s['EnergyDashboard__StatLabel']}>total seconds</span>
                 </div>
+                {data.grid_carbon_intensity_gco2_kwh != null && (
+                    <div className={s['EnergyDashboard__Stat']}>
+                        <span className={s['EnergyDashboard__StatValue']}>{Math.round(data.grid_carbon_intensity_gco2_kwh)}</span>
+                        <span className={s['EnergyDashboard__StatLabel']}>gCO₂/kWh (SE-nät)</span>
+                    </div>
+                )}
             </div>
 
             <div className={s['EnergyDashboard__Chart']}>
