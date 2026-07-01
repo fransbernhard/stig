@@ -1,22 +1,22 @@
 {
-  "timestamp": "2026-06-26T22:17:35Z",
-  "run_id": "14",
-  "workflow_url": "https://github.com/fransbernhard/stig/actions/runs/28268376618",
-  "previous_total_joules": 0,
+  "timestamp": "2026-07-01T11:28:22Z",
+  "run_id": "15",
+  "workflow_url": "https://github.com/fransbernhard/stig/actions/runs/28514172409",
+  "previous_total_joules": 114.5418,
   "steps": [
     {
       "label": "npm install",
-      "cpu_avg_percent": "52.7951",
-      "energy_joules": "62.0564",
-      "power_avg_watts": "5.37",
-      "time": "11.55"
+      "cpu_avg_percent": "33.4516",
+      "energy_joules": "71.2423",
+      "power_avg_watts": "4.43",
+      "time": "16.07"
     },
     {
       "label": "next build",
-      "cpu_avg_percent": "80.1518",
-      "energy_joules": "52.4854",
-      "power_avg_watts": "7.06",
-      "time": "7.43"
+      "cpu_avg_percent": "35.8994",
+      "energy_joules": "84.0008",
+      "power_avg_watts": "4.64",
+      "time": "18.11"
     }
   ]
 }
