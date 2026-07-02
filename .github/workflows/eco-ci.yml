@@ -40,28 +40,16 @@ jobs:
           label: next build
           json-output: "true"
 
-      - name: Fetch SE grid carbon intensity
-        id: carbon
-        run: |
-          INTENSITY=$(curl -s \
-            "https://api-access.electricitymaps.com/free-tier/carbon-intensity/latest?zone=SE" \
-            -H "auth-token: ${{ secrets.ELECTRICITY_MAPS_TOKEN }}" \
-            | jq '.carbonIntensity // null')
-          echo "intensity=$INTENSITY" >> "$GITHUB_OUTPUT"
-
       - name: Save energy data
         env:
           BUILD_JSON: ${{ steps.measure-build.outputs.data-lap-json }}
-          GRID_INTENSITY: ${{ steps.carbon.outputs.intensity }}
         run: |
           PREV_TOTAL=$(jq '[.steps[].energy_joules | tonumber] | add // 0' energy.json 2>/dev/null || echo 0)
           B="${BUILD_JSON:-null}"
-          G="${GRID_INTENSITY:-null}"
 
           jq -n \
             --argjson build "$B" \
             --argjson prev "$PREV_TOTAL" \
-            --argjson grid "$G" \
             --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --arg run "${{ github.run_number }}" \
             --arg url "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
@@ -70,7 +58,6 @@ jobs:
               run_id: $run,
               workflow_url: $url,
               previous_total_joules: $prev,
-              grid_carbon_intensity_gco2_kwh: $grid,
               steps: (if $build == null then [] else ($build.steps // []) end)
             }' > energy.json
 
