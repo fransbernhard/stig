@@ -10,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.78rem;
+    font-size: 12px;
     color: $color-muted;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .EnergyDashboard__StatValue {
-    font-size: 1.75rem;
+    font-size: 28px;
     font-weight: 700;
     display: flex;
     align-items: baseline;
@@ -43,7 +43,7 @@
 }
 
 .EnergyDashboard__Delta {
-    font-size: 0.8rem;
+    font-size: 13px;
     font-weight: 600;
     padding: 0.15em 0.45em;
     border-radius: 0.4em;
@@ -60,7 +60,7 @@
 }
 
 .EnergyDashboard__StatLabel {
-    font-size: 0.72rem;
+    font-size: 12px;
     color: $color-muted;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -70,10 +70,11 @@
     border: 1px solid $border-light;
     border-radius: 1rem;
     padding: 1.25rem 1rem 0.75rem;
+    max-width: 360px;
 }
 
 .EnergyDashboard__ChartTitle {
-    font-size: 0.78rem;
+    font-size: 12px;
     font-weight: 600;
     color: $color-muted;
     margin-bottom: 0.5rem;
@@ -83,7 +84,7 @@
     border: 1px solid $border-light;
     border-radius: 1rem;
     overflow: hidden;
-    font-size: 0.82rem;
+    font-size: 13px;
 }
 
 .EnergyDashboard__Row {
@@ -97,7 +98,7 @@
     }
 
     &--Head {
-        font-size: 0.7rem;
+        font-size: 11px;
         color: $color-muted;
         text-transform: uppercase;
         letter-spacing: 0.05em;

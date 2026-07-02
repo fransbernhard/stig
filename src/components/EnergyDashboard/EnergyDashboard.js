@@ -44,12 +44,6 @@ export default function EnergyDashboard({ data }) {
                     <span className={s['EnergyDashboard__StatValue']}>{totalTime.toFixed(1)}</span>
                     <span className={s['EnergyDashboard__StatLabel']}>total seconds</span>
                 </div>
-                {data.grid_carbon_intensity_gco2_kwh != null && (
-                    <div className={s['EnergyDashboard__Stat']}>
-                        <span className={s['EnergyDashboard__StatValue']}>{Math.round(data.grid_carbon_intensity_gco2_kwh)}</span>
-                        <span className={s['EnergyDashboard__StatLabel']}>gCO₂/kWh (SE-nät)</span>
-                    </div>
-                )}
             </div>
 
             <div className={s['EnergyDashboard__Chart']}>
@@ -71,7 +65,7 @@ export default function EnergyDashboard({ data }) {
                             contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e5e7eb' }}
                             formatter={(v) => [`${v} J`, 'Energy']}
                         />
-                        <Bar dataKey="energy" radius={[4, 4, 0, 0]}>
+                        <Bar dataKey="energy" radius={[4, 4, 0, 0]} maxBarSize={80}>
                             {chartData.map((_, i) => (
                                 <Cell key={i} fill={STEP_COLORS[i % STEP_COLORS.length]} />
                             ))}
