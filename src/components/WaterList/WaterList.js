@@ -37,11 +37,11 @@ export default function WaterList({ sites }) {
             {filtered.length === 0 ? (
                 <p className={s['WaterList__Empty']}>Ingen badplats matchar sökningen.</p>
             ) : (
-                <section className={s['WaterList__Grid']}>
+                <ul className={s['WaterList__List']}>
                     {filtered.map((site) => (
                         <WaterCard key={site.bathingWater.id} {...site} />
                     ))}
-                </section>
+                </ul>
             )}
         </div>
     )

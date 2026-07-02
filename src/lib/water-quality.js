@@ -11,8 +11,17 @@ export async function fetchStockholmWaterQuality() {
     if (!res.ok) throw new Error(`Waters ${res.status}`)
     const { watersAndAdvisories } = await res.json()
 
+    const STOCKHOLM_LAN = new Set([
+        'Botkyrka', 'Danderyd', 'Ekerö', 'Haninge', 'Huddinge',
+        'Järfälla', 'Lidingö', 'Nacka', 'Norrtälje', 'Nykvarn',
+        'Nynäshamn', 'Salem', 'Sigtuna', 'Sollentuna', 'Solna',
+        'Stockholm', 'Sundbyberg', 'Södertälje', 'Tyresö', 'Täby',
+        'Upplands Väsby', 'Upplands-Bro', 'Vallentuna', 'Vaxholm',
+        'Värmdö', 'Österåker',
+    ])
+
     const stockholm = watersAndAdvisories.filter(
-        (w) => w.bathingWater.municipality?.name === 'Stockholm'
+        (w) => STOCKHOLM_LAN.has(w.bathingWater.municipality?.name)
     )
 
     stockholm.sort((a, b) => {

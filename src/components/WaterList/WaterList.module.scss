@@ -18,7 +18,7 @@
     border: 1px solid $border-light;
     border-radius: 0.625rem;
     padding: 0.6rem 1rem;
-    font-size: 0.875rem;
+    font-size: 14px;
     font-family: inherit;
     color: var(--foreground);
     outline: none;
@@ -40,7 +40,7 @@
 }
 
 .WaterList__Meta {
-    font-size: 0.72rem;
+    font-size: 12px;
     color: $color-muted;
     white-space: nowrap;
     flex-shrink: 0;
@@ -51,22 +51,13 @@
     font-weight: 600;
 }
 
-.WaterList__Grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-
-    @include media-up($bp-md) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include media-up($bp-lg) {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.WaterList__List {
+    list-style: none;
+    border-top: 1px solid $border-light;
 }
 
 .WaterList__Empty {
     color: $color-muted;
-    font-size: 0.875rem;
+    font-size: 14px;
     padding: 1rem 0;
 }
