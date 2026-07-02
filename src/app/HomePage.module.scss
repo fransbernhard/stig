@@ -1,0 +1,151 @@
+@use '../styles/includes' as *;
+
+$mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+
+.HomePage {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+}
+
+.HomePage__Hero {
+    background: #fff;
+    min-height: 50vh;
+    display: flex;
+    align-items: flex-end;
+}
+
+.HomePage__HeroInner {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.HomePage__Eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: $mono;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.HomePage__Title {
+    font-size: clamp(40px, 7vw, 64px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--foreground);
+    text-wrap: balance;
+}
+
+.HomePage__TitleAccent {
+    color: var(--accent);
+}
+
+.HomePage__Subtitle {
+    font-size: 16px;
+    color: $color-muted;
+    line-height: 1.65;
+    max-width: 46ch;
+}
+
+.HomePage__Body {
+    max-width: 960px;
+    width: 100%;
+    margin: -2.5rem auto 0;
+    padding: 0 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+.HomePage__Grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+
+    @include media-up($bp-sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.HomePage__Card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid $border-light;
+    border-radius: 1rem;
+    border-top: 3px solid var(--card-accent, $border-light);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 10px rgba(26, 20, 16, 0.07);
+    transition: box-shadow 0.2s, transform 0.2s;
+
+    &:hover {
+        box-shadow: 0 6px 24px rgba(26, 20, 16, 0.11);
+        transform: translateY(-2px);
+    }
+
+    &:hover .HomePage__Arrow {
+        transform: translateX(3px);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--card-accent, var(--accent));
+        outline-offset: 2px;
+    }
+}
+
+.HomePage__CardMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.2rem;
+}
+
+.HomePage__Tag {
+    font-size: 10px;
+    font-weight: 600;
+    font-family: $mono;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--card-accent, $color-muted);
+}
+
+.HomePage__Arrow {
+    font-size: 14px;
+    color: $color-muted;
+    transition: transform 0.15s ease;
+}
+
+.HomePage__CardTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--foreground);
+    letter-spacing: -0.015em;
+}
+
+.HomePage__CardDesc {
+    font-size: 13px;
+    color: $color-muted;
+    line-height: 1.6;
+    margin-top: 0.1rem;
+}
+
+.HomePage__Footer {
+    font-size: 12px;
+    font-family: $mono;
+    color: $color-muted;
+    border-top: 1px solid $border-light;
+    padding-top: 1.25rem;
+}

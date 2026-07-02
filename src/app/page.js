@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import s from './page.module.scss'
+import s from './HomePage.module.scss'
 
 const SECTIONS = [
     {
@@ -13,7 +13,7 @@ const SECTIONS = [
         href: '/water',
         title: 'Badvatten',
         tag: 'Säsong',
-        description: '45 badplatser i Stockholms kommun. Avrådan och vattenstatus från Havs- och vattenmyndigheten.',
+        description: '252 badplatser i Stockholms län. Avrådan och vattenstatus från Havs- och vattenmyndigheten.',
         accent: '#38bdf8',
     },
     {
@@ -35,38 +35,42 @@ const SECTIONS = [
 export default function HomePage() {
     return (
         <main className={s.HomePage}>
-            <header className={s['HomePage__Header']}>
-                <p className={s['HomePage__Eyebrow']}>STIG</p>
-                <h1 className={s['HomePage__Title']}>
-                    Stockholm<br />
-                    <span className={s['HomePage__TitleAccent']}>Miljödata</span>
-                </h1>
-                <p className={s['HomePage__Subtitle']}>
-                    Öppen data om luft, vatten och energi i Stockholm — samlat på ett ställe.
-                </p>
-            </header>
-
-            <div className={s['HomePage__Grid']}>
-                {SECTIONS.map((section) => (
-                    <Link
-                        key={section.href}
-                        href={section.href}
-                        className={s['HomePage__Card']}
-                        style={{ '--accent': section.accent }}
-                    >
-                        <div className={s['HomePage__CardMeta']}>
-                            <span className={s['HomePage__Tag']}>{section.tag}</span>
-                            <span className={s['HomePage__Arrow']} aria-hidden="true">→</span>
-                        </div>
-                        <h2 className={s['HomePage__CardTitle']}>{section.title}</h2>
-                        <p className={s['HomePage__CardDesc']}>{section.description}</p>
-                    </Link>
-                ))}
+            <div className={s['HomePage__Hero']}>
+                <div className={s['HomePage__HeroInner']}>
+                    <p className={s['HomePage__Eyebrow']}>STIG</p>
+                    <h1 className={s['HomePage__Title']}>
+                        Stockholm<br />
+                        <span className={s['HomePage__TitleAccent']}>Miljödata</span>
+                    </h1>
+                    <p className={s['HomePage__Subtitle']}>
+                        Öppen data om luft, vatten och energi i Stockholm — samlat på ett ställe.
+                    </p>
+                </div>
             </div>
 
-            <footer className={s['HomePage__Footer']}>
-                Data från SMHI, Havs- och vattenmyndigheten, Stockholm Vatten och Avfall samt eco-ci
-            </footer>
+            <div className={s['HomePage__Body']}>
+                <div className={s['HomePage__Grid']}>
+                    {SECTIONS.map((section) => (
+                        <Link
+                            key={section.href}
+                            href={section.href}
+                            className={s['HomePage__Card']}
+                            style={{ '--card-accent': section.accent }}
+                        >
+                            <div className={s['HomePage__CardMeta']}>
+                                <span className={s['HomePage__Tag']}>{section.tag}</span>
+                                <span className={s['HomePage__Arrow']} aria-hidden="true">→</span>
+                            </div>
+                            <h2 className={s['HomePage__CardTitle']}>{section.title}</h2>
+                            <p className={s['HomePage__CardDesc']}>{section.description}</p>
+                        </Link>
+                    ))}
+                </div>
+
+                <footer className={s['HomePage__Footer']}>
+                    Data från SMHI, Havs- och vattenmyndigheten, Stockholm Vatten och Avfall samt eco-ci
+                </footer>
+            </div>
         </main>
     )
 }
