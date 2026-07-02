@@ -5,16 +5,16 @@
     border: 1px solid $border-light;
     border-radius: 1rem;
     padding: 1.25rem 1rem 0.75rem;
-}
 
-.HourlyChart__Title {
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--foreground);
-}
+    &__Title {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--foreground);
+    }
 
-.HourlyChart__Unit {
-    font-weight: 400;
-    color: $color-muted;
+    &__Unit {
+        font-weight: 400;
+        color: $color-muted;
+    }
 }

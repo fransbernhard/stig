@@ -7,48 +7,48 @@
     padding: 2.5rem 1.5rem 2rem;
     border-radius: 1.5rem;
     transition: background 0.4s ease;
-}
 
-.AQIHero__City {
-    font-size: 14px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $color-muted;
-    margin-bottom: 1.25rem;
-}
+    &__City {
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $color-muted;
+        margin-bottom: 1.25rem;
+    }
 
-.AQIHero__Circle {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 6px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-}
+    &__Circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 6px solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+    }
 
-.AQIHero__Value {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1;
-}
+    &__Value {
+        font-size: 44px;
+        font-weight: 700;
+        line-height: 1;
+    }
 
-.AQIHero__Unit {
-    font-size: 11px;
-    color: $color-muted;
-    letter-spacing: 0.08em;
-    margin-top: 2px;
-}
+    &__Unit {
+        font-size: 11px;
+        color: $color-muted;
+        letter-spacing: 0.08em;
+        margin-top: 2px;
+    }
 
-.AQIHero__Label {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
+    &__Label {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
 
-.AQIHero__Sub {
-    font-size: 13px;
-    color: $color-muted;
+    &__Sub {
+        font-size: 13px;
+        color: $color-muted;
+    }
 }

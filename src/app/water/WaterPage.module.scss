@@ -7,39 +7,39 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-}
 
-.WaterPage__Header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
+    &__Header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-.WaterPage__Title {
-    font-size: 30px;
-    font-weight: 700;
-}
+    &__Title {
+        font-size: 30px;
+        font-weight: 700;
+    }
 
-.WaterPage__Subtitle {
-    font-size: 14px;
-    color: $color-muted;
-    line-height: 1.6;
-    max-width: 60ch;
-}
+    &__Subtitle {
+        font-size: 14px;
+        color: $color-muted;
+        line-height: 1.6;
+        max-width: 60ch;
+    }
 
-.WaterPage__Empty {
-    color: $color-muted;
-    font-size: 14px;
-}
+    &__Empty {
+        color: $color-muted;
+        font-size: 14px;
+    }
 
-.WaterPage__Footer {
-    text-align: center;
-    font-size: 12px;
-    color: $color-muted;
-    margin-top: 1rem;
+    &__Footer {
+        text-align: center;
+        font-size: 12px;
+        color: $color-muted;
+        margin-top: 1rem;
 
-    a {
-        text-decoration: underline;
-        text-underline-offset: 2px;
+        a {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
     }
 }

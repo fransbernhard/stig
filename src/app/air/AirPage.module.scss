@@ -14,65 +14,65 @@
         gap: 2.5rem;
         align-items: start;
     }
-}
 
-.AirPage__Left {
-    @include media-up($bp-lg) {
-        position: sticky;
-        top: calc(54px + 2rem);
+    &__Left {
+        @include media-up($bp-lg) {
+            position: sticky;
+            top: calc(54px + 2rem);
+        }
     }
-}
 
-.AirPage__Right {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-width: 0;
-}
-
-.AirPage__Grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.65rem;
-
-    @include media-up($bp-md) {
-        grid-template-columns: repeat(3, 1fr);
+    &__Right {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-width: 0;
     }
-}
 
-.AirPage__Charts {
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    margin-top: 0.25rem;
-}
+    &__Grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.65rem;
 
-.AirPage__Footer {
-    font-size: 12px;
-    color: $color-muted;
-    margin-top: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-
-    a {
-        text-decoration: underline;
-        text-underline-offset: 2px;
+        @include media-up($bp-md) {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
-}
 
-.AirPage__FooterNote {
-    line-height: 1.55;
-    max-width: 52ch;
-}
+    &__Charts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        margin-top: 0.25rem;
+    }
 
-.AirPage__Error {
-    color: $color-error;
-    padding: 2rem;
-}
+    &__Footer {
+        font-size: 12px;
+        color: $color-muted;
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
 
-.AirPage__Loading {
-    color: $color-muted;
-    padding: 4rem 2rem;
-    font-size: 14px;
+        a {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+    }
+
+    &__FooterNote {
+        line-height: 1.55;
+        max-width: 52ch;
+    }
+
+    &__Error {
+        color: $color-error;
+        padding: 2rem;
+    }
+
+    &__Loading {
+        color: $color-muted;
+        padding: 4rem 2rem;
+        font-size: 14px;
+    }
 }

@@ -9,71 +9,71 @@
     flex-direction: column;
     gap: 0.3rem;
     box-shadow: 0 1px 3px rgba(26, 35, 24, 0.04);
-}
 
-.DrinkingWaterCard__Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.5rem;
-    margin-bottom: 0.15rem;
-}
+    &__Header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.15rem;
+    }
 
-.DrinkingWaterCard__Label {
-    font-size: 11px;
-    color: $color-muted;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-weight: 500;
-}
+    &__Label {
+        font-size: 11px;
+        color: $color-muted;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
 
-.DrinkingWaterCard__Category {
-    font-size: 9px;
-    color: $color-muted;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    flex-shrink: 0;
-    background: var(--background);
-    border: 1px solid $border-light;
-    border-radius: 0.3rem;
-    padding: 0.15em 0.45em;
-}
+    &__Category {
+        font-size: 9px;
+        color: $color-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+        flex-shrink: 0;
+        background: var(--background);
+        border: 1px solid $border-light;
+        border-radius: 0.3rem;
+        padding: 0.15em 0.45em;
+    }
 
-.DrinkingWaterCard__Value {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.15;
-}
+    &__Value {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.15;
+    }
 
-.DrinkingWaterCard__Unit {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-muted;
-}
+    &__Unit {
+        font-size: 12px;
+        font-weight: 400;
+        color: $color-muted;
+    }
 
-.DrinkingWaterCard__BarTrack {
-    height: 3px;
-    background: $border-light;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 0.35rem;
-}
+    &__BarTrack {
+        height: 3px;
+        background: $border-light;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-top: 0.35rem;
+    }
 
-.DrinkingWaterCard__BarFill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.6s ease;
-}
+    &__BarFill {
+        height: 100%;
+        border-radius: 2px;
+        transition: width 0.6s ease;
+    }
 
-.DrinkingWaterCard__PctLabel {
-    font-size: 10px;
-    color: $color-muted;
-    margin-top: 0.1rem;
-}
+    &__PctLabel {
+        font-size: 10px;
+        color: $color-muted;
+        margin-top: 0.1rem;
+    }
 
-.DrinkingWaterCard__Limit {
-    font-size: 10px;
-    color: $color-muted;
-    margin-top: 0.1rem;
+    &__Limit {
+        font-size: 10px;
+        color: $color-muted;
+        margin-top: 0.1rem;
+    }
 }

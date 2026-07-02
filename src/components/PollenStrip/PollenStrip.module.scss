@@ -4,40 +4,40 @@
     border: 1px solid $border-light;
     border-radius: 1rem;
     padding: 1.25rem 1rem;
-}
 
-.PollenStrip__Heading {
-    font-size: 12px;
-    color: $color-muted;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-}
+    &__Heading {
+        font-size: 12px;
+        color: $color-muted;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+    }
 
-.PollenStrip__Items {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
+    &__Items {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
 
-.PollenStrip__Item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 14px;
-}
+    &__Item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 14px;
+    }
 
-.PollenStrip__Dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
+    &__Dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
 
-.PollenStrip__Name {
-    color: #6b7280;
-}
+    &__Name {
+        color: #6b7280;
+    }
 
-.PollenStrip__Level {
-    font-weight: 600;
+    &__Level {
+        font-weight: 600;
+    }
 }
