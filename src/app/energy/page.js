@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 import EnergyDashboard from '@/components/EnergyDashboard'
-import s from './page.module.scss'
+import s from './EnergyPage.module.scss'
 
 async function getEnergyData() {
     try {

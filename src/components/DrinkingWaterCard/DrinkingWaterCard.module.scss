@@ -20,7 +20,7 @@
 }
 
 .DrinkingWaterCard__Label {
-    font-size: 0.7rem;
+    font-size: 11px;
     color: $color-muted;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -28,7 +28,7 @@
 }
 
 .DrinkingWaterCard__Category {
-    font-size: 0.58rem;
+    font-size: 9px;
     color: $color-muted;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -41,13 +41,13 @@
 }
 
 .DrinkingWaterCard__Value {
-    font-size: 1.4rem;
+    font-size: 22px;
     font-weight: 600;
     line-height: 1.15;
 }
 
 .DrinkingWaterCard__Unit {
-    font-size: 0.72rem;
+    font-size: 12px;
     font-weight: 400;
     color: $color-muted;
 }
@@ -67,13 +67,13 @@
 }
 
 .DrinkingWaterCard__PctLabel {
-    font-size: 0.62rem;
+    font-size: 10px;
     color: $color-muted;
     margin-top: 0.1rem;
 }
 
 .DrinkingWaterCard__Limit {
-    font-size: 0.65rem;
+    font-size: 10px;
     color: $color-muted;
     margin-top: 0.1rem;
 }

@@ -1,6 +1,6 @@
 import { fetchDrinkingWaterData, DISPLAY_PARAMS } from '@/lib/drinking-water'
 import DrinkingWaterCard from '@/components/DrinkingWaterCard'
-import s from './page.module.scss'
+import s from './DrinkingWaterPage.module.scss'
 
 function computeStatus(params) {
     const results = []

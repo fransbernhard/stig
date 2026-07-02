@@ -7,7 +7,7 @@ import AQIHero from '@/components/AQIHero'
 import PollutantCard from '@/components/PollutantCard'
 import HourlyChart from '@/components/HourlyChart'
 import PollenStrip from '@/components/PollenStrip'
-import s from './page.module.scss'
+import s from './AirPage.module.scss'
 
 const REFRESH_INTERVAL_MS = 30 * 60 * 1000
 

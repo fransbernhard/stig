@@ -10,7 +10,7 @@
 }
 
 .AQIHero__City {
-    font-size: 0.85rem;
+    font-size: 14px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: $color-muted;
@@ -30,25 +30,25 @@
 }
 
 .AQIHero__Value {
-    font-size: 2.75rem;
+    font-size: 44px;
     font-weight: 700;
     line-height: 1;
 }
 
 .AQIHero__Unit {
-    font-size: 0.7rem;
+    font-size: 11px;
     color: $color-muted;
     letter-spacing: 0.08em;
     margin-top: 2px;
 }
 
 .AQIHero__Label {
-    font-size: 1.4rem;
+    font-size: 22px;
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
 
 .AQIHero__Sub {
-    font-size: 0.8rem;
+    font-size: 13px;
     color: $color-muted;
 }
