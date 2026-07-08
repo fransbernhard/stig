@@ -44,18 +44,22 @@ export default function CarbonBadge() {
             {mg === null ? '~… mg CO₂' : `~${mg} mg CO₂`}
             {mg !== null && (
                 <span className={s['CarbonBadge__Tooltip']}>
-                    <span className={s['CarbonBadge__TooltipRow']}>
-                        <span>Denna sida</span>
-                        <strong>{mg} mg</strong>
+                    <p className={s['CarbonBadge__TooltipDesc']}>
+                        Uppskattad CO₂ baserat på sidans nedladdade data, enligt Sustainable Web Design-modellen.
+                    </p>
+                    <span className={s['CarbonBadge__TooltipRows']}>
+                        <span className={s['CarbonBadge__TooltipRow']}>
+                            <span>Denna sida</span>
+                            <strong>{mg} mg</strong>
+                        </span>
+                        <span className={s['CarbonBadge__TooltipRow']}>
+                            <span>Snitt webb</span>
+                            <span>{AVG_MG} mg</span>
+                        </span>
                     </span>
-                    <span className={s['CarbonBadge__TooltipRow']}>
-                        <span>Snitt (HTTP Archive)</span>
-                        <span>{AVG_MG} mg</span>
-                    </span>
-                    <span className={s['CarbonBadge__TooltipDivider']} />
-                    <span className={`${s['CarbonBadge__TooltipVerdict']} ${pct > 0 ? s['CarbonBadge__TooltipVerdict--Good'] : s['CarbonBadge__TooltipVerdict--Bad']}`}>
+                    <p className={`${s['CarbonBadge__TooltipVerdict']} ${pct > 0 ? s['CarbonBadge__TooltipVerdict--Good'] : s['CarbonBadge__TooltipVerdict--Bad']}`}>
                         {pct > 0 ? `${pct}% under snitt` : `${Math.abs(pct)}% över snitt`}
-                    </span>
+                    </p>
                 </span>
             )}
         </span>
