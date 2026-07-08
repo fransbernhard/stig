@@ -8,9 +8,15 @@ export default function WaterList({ sites }) {
     const [query, setQuery] = useState('')
 
     const filtered = query.trim()
-        ? sites.filter((site) =>
-              site.bathingWater.name.toLowerCase().includes(query.toLowerCase())
-          )
+        ? sites.filter((site) => {
+              const q = query.toLowerCase()
+              const haystack = [
+                  site.bathingWater.name,
+                  site.bathingWater.municipality?.name,
+                  site.bathingWater.waterTypeIdText,
+              ].filter(Boolean).join(' ').toLowerCase()
+              return haystack.includes(q)
+          })
         : sites
 
     const advisoryCount = filtered.filter((site) => site.adviceAgainstBathing?.length > 0).length
