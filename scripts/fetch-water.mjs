@@ -11,12 +11,27 @@ const STOCKHOLM_LAN = new Set([
     'Värmdö', 'Österåker',
 ])
 
-const res = await fetch(BASE_URL + '/bathing-waters', {
-    headers: {
-        'Accept': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (compatible; stig/1.0)',
-    },
-})
+const MAX_ATTEMPTS = 3
+const RETRY_DELAY_MS = 5000
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+let res
+for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+        res = await fetch(BASE_URL + '/bathing-waters', {
+            headers: {
+                'Accept': 'application/json',
+                'User-Agent': 'Mozilla/5.0 (compatible; stig/1.0)',
+            },
+        })
+        break
+    } catch (err) {
+        console.error(`Attempt ${attempt}/${MAX_ATTEMPTS} failed: ${err.message}`)
+        if (attempt === MAX_ATTEMPTS) process.exit(1)
+        await sleep(RETRY_DELAY_MS)
+    }
+}
 
 if (!res.ok) {
     console.error(`HaV API responded ${res.status}`)
