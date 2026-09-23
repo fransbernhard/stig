@@ -4,7 +4,7 @@ on:
     branches: [ "develop", "master" ]
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 concurrency:
@@ -48,21 +48,22 @@ jobs:
           label: next build
           json-output: "true"
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: out/
+      - id: pages
+        uses: actions/configure-pages@v5
 
-      # Committed for the next deploy — the site always shows the previous run's measurement
+      # Written straight into the export so the page shows this build's numbers, no commit needed.
+      # The previous total is read from the currently published site.
       - name: Save energy data
         env:
           BUILD_JSON: ${{ steps.measure-build.outputs.data-lap-json }}
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
-          PREV_TOTAL=$(jq '[.steps[].energy_joules | tonumber] | add // 0' energy.json 2>/dev/null || echo 0)
+          PREV_TOTAL=$(curl -sf "$SITE_URL/energy.json" | jq '[.steps[].energy_joules | tonumber] | add // 0' 2>/dev/null || echo 0)
           B="${BUILD_JSON:-null}"
 
           jq -n \
             --argjson build "$B" \
-            --argjson prev "$PREV_TOTAL" \
+            --argjson prev "${PREV_TOTAL:-0}" \
             --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --arg run "${{ github.run_number }}" \
             --arg url "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
@@ -72,15 +73,11 @@ jobs:
               workflow_url: $url,
               previous_total_joules: $prev,
               steps: (if $build == null then [] else ($build.steps // []) end)
-            }' > energy.json
+            }' > out/energy.json
 
-          git config user.name "github-actions"
-          git config user.email "actions@users.noreply.github.com"
-          git add energy.json
-          git diff --staged --quiet && exit 0
-          git commit -m "chore: update energy metrics [skip ci]"
-          git pull --rebase
-          git push
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out/
 
   deploy:
     needs: build

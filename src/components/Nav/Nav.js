@@ -9,7 +9,7 @@ const LINKS = [
     { href: '/air', label: 'Luft' },
     { href: '/water', label: 'Badvatten' },
     { href: '/drinking-water', label: 'Dricksvatten' },
-    { href: '/energy', label: 'Energi' },
+    { href: '/energy', label: 'Byggenergi' },
 ]
 
 export default function Nav() {

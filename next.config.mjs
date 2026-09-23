@@ -5,12 +5,15 @@ import crypto from 'crypto'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const isProd = process.env.NODE_ENV === 'production'
+const basePath = isProd ? '/stig' : ''
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
-    basePath: isProd ? '/stig' : '',
+    basePath,
     images: { unoptimized: true },
+    // For client-side fetches of files in the export, which basePath doesn't rewrite
+    env: { NEXT_PUBLIC_BASE_PATH: basePath },
     sassOptions: {
         includePaths: [join(__dirname, 'src')],
     },

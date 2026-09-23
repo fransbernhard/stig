@@ -25,9 +25,9 @@ const SECTIONS = [
     },
     {
         href: '/energy',
-        title: 'Energianvändning',
-        tag: 'Per deploy',
-        description: 'Energiåtgång och CO₂-utsläpp från CI/CD-körningar. Mäts via eco-ci vid varje bygge.',
+        title: 'Energiåtgång per bygge',
+        tag: 'Per bygge',
+        description: 'Hur mycket energi som går åt när sajten byggs och publiceras. Uppskattas med eco-ci vid varje publicering.',
         accent: '#fbbf24',
     },
 ]

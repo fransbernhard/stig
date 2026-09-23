@@ -19,8 +19,28 @@
         font-weight: 700;
     }
 
-    &__Empty {
-        color: $color-muted;
+    &__Subtitle {
         font-size: 14px;
+        color: $color-muted;
+        max-width: 60ch;
+    }
+
+    &__Notice {
+        background: rgba(156, 163, 175, 0.08);
+        border: 1px solid $border-dark;
+        border-radius: 0.75rem;
+        padding: 0.9rem 1rem;
+        font-size: 13px;
+        color: $color-muted;
+        line-height: 1.5;
+
+        strong {
+            color: var(--foreground);
+        }
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
     }
 }

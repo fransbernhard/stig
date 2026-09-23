@@ -31,7 +31,7 @@ export default async function WaterPage() {
 
             {sites.length === 0 ? (
                 <p className={s['WaterPage__Empty']}>
-                    Ingen data tillgänglig — kör <code>npm run fetch-data</code> för att hämta.
+                    Det finns ingen data – kör <code>npm run fetch-data</code> för att hämta den.
                 </p>
             ) : (
                 <WaterList sites={sites} />

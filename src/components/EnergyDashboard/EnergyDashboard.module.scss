@@ -5,6 +5,11 @@
     flex-direction: column;
     gap: 1.25rem;
 
+    &__Empty {
+        color: $color-muted;
+        font-size: 14px;
+    }
+
     &__Meta {
         display: flex;
         justify-content: space-between;
@@ -63,6 +68,12 @@
         color: $color-muted;
         text-transform: uppercase;
         letter-spacing: 0.06em;
+    }
+
+    &__Compare {
+        font-size: 13px;
+        color: $color-muted;
+        margin-top: -0.5rem;
     }
 
     &__Chart {

@@ -130,7 +130,7 @@ export default function Page() {
                         dygnet, inklusive prognos för resten av dygnet — den streckade linjen
                         markerar innevarande timme (Nu). CAMS-modellen körs en gång per dygn, så
                         prognosen uppdateras inte varje timme även om sidan hämtar ny data var 30:e minut
-                        (bara när fliken är öppen).
+                        (så länge fliken visas).
                     </p>
                     <p>
                         Källa:{' '}

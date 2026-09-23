@@ -1,11 +1,17 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { niceScale } from '@/lib/chart'
 import s from './EnergyDashboard.module.scss'
+
+// Written into the export by the deploy workflow after the build is measured
+const ENERGY_URL = `${process.env.NEXT_PUBLIC_BASE_PATH}/energy.json`
 
 const STEP_COLORS = ['#6366f1', '#8b5cf6', '#a78bfa']
 
 const CHART = { width: 320, height: 160, top: 8, right: 8, bottom: 20, left: 34, maxBar: 80, radius: 4 }
 
-// Plain SVG, rendered at build time — this component ships no JS
+// Plain SVG instead of a chart library
 function EnergyChart({ data }) {
     const { width, height, top, right, bottom, left, maxBar, radius } = CHART
     const plotW = width - left - right
@@ -47,7 +53,30 @@ function EnergyChart({ data }) {
     )
 }
 
-export default function EnergyDashboard({ data }) {
+export default function EnergyDashboard() {
+    const [data, setData] = useState(null)
+    const [status, setStatus] = useState('loading')
+
+    useEffect(() => {
+        fetch(ENERGY_URL, { cache: 'no-cache' })
+            .then((res) => (res.ok ? res.json() : Promise.reject()))
+            .then((json) => {
+                setData(json)
+                setStatus('ready')
+            })
+            .catch(() => setStatus('missing'))
+    }, [])
+
+    if (status === 'loading') return <p className={s['EnergyDashboard__Empty']}>Laddar…</p>
+    if (status === 'missing') {
+        return (
+            <p className={s['EnergyDashboard__Empty']}>
+                Det finns ingen mätning att visa. Energin mäts bara när sajten byggs och publiceras via
+                GitHub Actions, inte när den körs lokalt.
+            </p>
+        )
+    }
+
     const steps = (data.steps ?? []).filter(Boolean)
     const totalEnergy = steps.reduce((sum, step) => sum + parseFloat(step.energy_joules || 0), 0)
     const totalTime = steps.reduce((sum, step) => sum + parseFloat(step.time || 0), 0)
@@ -66,7 +95,7 @@ export default function EnergyDashboard({ data }) {
             <div className={s['EnergyDashboard__Meta']}>
                 <p>{data.timestamp.replace('T', ' ').slice(0, 16)} UTC</p>
                 <a className={s['EnergyDashboard__Link']} href={data.workflow_url} target="_blank" rel="noopener">
-                    Run #{data.run_id} ↗
+                    Körning #{data.run_id} ↗
                 </a>
             </div>
 
@@ -75,30 +104,38 @@ export default function EnergyDashboard({ data }) {
                     <span className={s['EnergyDashboard__StatValue']}>
                         {totalEnergy.toFixed(2)}
                         {deltaPct !== null && (
-                            <span className={`${s['EnergyDashboard__Delta']} ${deltaPct > 0 ? s['EnergyDashboard__Delta--Up'] : s['EnergyDashboard__Delta--Down']}`}>
+                            <span
+                                className={`${s['EnergyDashboard__Delta']} ${deltaPct > 0 ? s['EnergyDashboard__Delta--Up'] : s['EnergyDashboard__Delta--Down']}`}
+                                title="Jämfört med förra bygget"
+                            >
                                 {deltaPct > 0 ? '▲' : '▼'} {Math.abs(deltaPct).toFixed(1)}%
                             </span>
                         )}
                     </span>
-                    <span className={s['EnergyDashboard__StatLabel']}>total joules</span>
+                    <span className={s['EnergyDashboard__StatLabel']}>total energi (J)</span>
                 </div>
                 <div className={s['EnergyDashboard__Stat']}>
                     <span className={s['EnergyDashboard__StatValue']}>{totalTime.toFixed(1)}</span>
-                    <span className={s['EnergyDashboard__StatLabel']}>total seconds</span>
+                    <span className={s['EnergyDashboard__StatLabel']}>total tid (s)</span>
                 </div>
             </div>
 
+            <p className={s['EnergyDashboard__Compare']}>
+                {deltaPct !== null && <>{deltaPct > 0 ? 'Högre' : 'Lägre'} än förra bygget. </>}
+                Det motsvarar en 10 W LED-lampa som lyser i ungefär {Math.round(totalEnergy / 10)} sekunder.
+            </p>
+
             <div className={s['EnergyDashboard__Chart']}>
-                <p className={s['EnergyDashboard__ChartTitle']}>Energy per phase (J)</p>
+                <p className={s['EnergyDashboard__ChartTitle']}>Energi per steg (J)</p>
                 <EnergyChart data={chartData} />
             </div>
 
             <div className={s['EnergyDashboard__Table']}>
                 <div className={`${s['EnergyDashboard__Row']} ${s['EnergyDashboard__Row--Head']}`}>
-                    <span>Phase</span>
-                    <span>Joules</span>
-                    <span>Seconds</span>
-                    <span>Avg CPU</span>
+                    <span>Steg</span>
+                    <span>Energi (J)</span>
+                    <span>Tid (s)</span>
+                    <span>CPU (snitt)</span>
                 </div>
                 {steps.map((step, i) => (
                     <div key={i} className={s['EnergyDashboard__Row']}>
