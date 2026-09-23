@@ -1,13 +1,5 @@
-import { DM_Sans } from 'next/font/google'
 import './globals.scss'
 import Nav from '@/components/Nav'
-
-const sans = DM_Sans({
-    subsets: ['latin'],
-    weight: ['400', '500', '600'],
-    variable: '--font-sans',
-    display: 'swap',
-})
 
 export const metadata = {
     title: 'Stig — Stockholms miljödata',
@@ -16,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="sv" className={sans.variable}>
+        <html lang="sv">
             <body>
                 <Nav />
                 {children}

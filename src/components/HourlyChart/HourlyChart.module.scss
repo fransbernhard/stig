@@ -17,4 +17,34 @@
         font-weight: 400;
         color: $color-muted;
     }
+
+    &__Now {
+        font-weight: 400;
+        color: $color-muted;
+    }
+
+    &__Svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+
+    &__Tick {
+        font-size: 10px;
+        fill: #9ca3af;
+    }
+
+    &__NowLabel {
+        font-size: 10px;
+        fill: #111827;
+    }
+
+    &__Hit {
+        fill: transparent;
+
+        &:hover {
+            fill: rgba(0, 0, 0, 0.04);
+        }
+    }
 }

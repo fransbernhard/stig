@@ -1,54 +1,21 @@
-'use client'
-
-import { useState } from 'react'
 import WaterCard from '@/components/WaterCard'
+import WaterSearch from './WaterSearch'
 import s from './WaterList.module.scss'
 
+const LIST_ID = 'water-list'
+
+// Cards are rendered as static HTML; only the search box ships JS
 export default function WaterList({ sites }) {
-    const [query, setQuery] = useState('')
-
-    const filtered = query.trim()
-        ? sites.filter((site) => {
-              const q = query.toLowerCase()
-              const haystack = [
-                  site.bathingWater.name,
-                  site.bathingWater.municipality?.name,
-                  site.bathingWater.waterTypeIdText,
-              ].filter(Boolean).join(' ').toLowerCase()
-              return haystack.includes(q)
-          })
-        : sites
-
-    const advisoryCount = filtered.filter((site) => site.adviceAgainstBathing?.length > 0).length
+    const advisoryCount = sites.filter((site) => site.adviceAgainstBathing?.length > 0).length
 
     return (
         <div className={s.WaterList}>
-            <div className={s['WaterList__SearchRow']}>
-                <input
-                    className={s['WaterList__Search']}
-                    type="search"
-                    placeholder="Sök badplats…"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    autoComplete="off"
-                />
-                <p className={s['WaterList__Meta']}>
-                    {filtered.length} platser
-                    {advisoryCount > 0 && (
-                        <span className={s['WaterList__AdvisoryBadge']}> · {advisoryCount} avrådan</span>
-                    )}
-                </p>
-            </div>
-
-            {filtered.length === 0 ? (
-                <p className={s['WaterList__Empty']}>Ingen badplats matchar sökningen.</p>
-            ) : (
-                <ul className={s['WaterList__List']}>
-                    {filtered.map((site) => (
-                        <WaterCard key={site.bathingWater.id} {...site} />
-                    ))}
-                </ul>
-            )}
+            <WaterSearch listId={LIST_ID} total={sites.length} advisoryCount={advisoryCount} />
+            <ul id={LIST_ID} className={s['WaterList__List']}>
+                {sites.map((site) => (
+                    <WaterCard key={site.bathingWater.id} {...site} />
+                ))}
+            </ul>
         </div>
     )
 }

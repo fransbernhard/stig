@@ -79,6 +79,22 @@
         margin-bottom: 0.5rem;
     }
 
+    &__Svg {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    &__Tick {
+        font-size: 10px;
+        fill: #9ca3af;
+    }
+
+    &__Label {
+        font-size: 11px;
+        fill: #9ca3af;
+    }
+
     &__Table {
         border: 1px solid $border-light;
         border-radius: 1rem;

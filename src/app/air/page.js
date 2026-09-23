@@ -10,6 +10,7 @@ import PollenStrip from '@/components/PollenStrip'
 import s from './AirPage.module.scss'
 
 const REFRESH_INTERVAL_MS = 30 * 60 * 1000
+const CHECK_INTERVAL_MS = 60 * 1000
 
 const CHART_COLORS = {
     pm2_5: '#6366f1',
@@ -36,10 +37,23 @@ export default function Page() {
         }
     }, [])
 
+    // Only refresh while the tab is visible; catch up when the user comes back
     useEffect(() => {
-        load()
-        const timer = setInterval(load, REFRESH_INTERVAL_MS)
-        return () => clearInterval(timer)
+        let lastLoad = 0
+        const refresh = () => {
+            if (document.hidden) return
+            if (Date.now() - lastLoad < REFRESH_INTERVAL_MS) return
+            lastLoad = Date.now()
+            load()
+        }
+
+        refresh()
+        const timer = setInterval(refresh, CHECK_INTERVAL_MS)
+        document.addEventListener('visibilitychange', refresh)
+        return () => {
+            clearInterval(timer)
+            document.removeEventListener('visibilitychange', refresh)
+        }
     }, [load])
 
     if (error) {
@@ -60,6 +74,7 @@ export default function Page() {
 
     const { hourly } = data
     const idx = getCurrentHourIndex(hourly.time)
+    const nowHour = hourly.time[idx]?.slice(11, 13)
 
     const chartData = (key) =>
         hourly.time.map((t, i) => ({
@@ -101,6 +116,7 @@ export default function Page() {
                             who={p.who}
                             color={CHART_COLORS[p.key]}
                             data={chartData(p.key)}
+                            nowHour={nowHour}
                         />
                     ))}
                 </section>
@@ -110,7 +126,11 @@ export default function Page() {
                         Datan gäller en fast punkt i centrala Stockholm (59.33°N, 18.07°E) och är en
                         modellprognos från CAMS (Copernicus). Det är inte ett medelvärde från stadens
                         mätstationer — CAMS-modellens rutnät är ~10 km, så värdena speglar ett bredare
-                        område kring innerstaden, inte ett specifikt kvarter.
+                        område kring innerstaden, inte ett specifikt kvarter. Graferna visar hela
+                        dygnet, inklusive prognos för resten av dygnet — den streckade linjen
+                        markerar innevarande timme (Nu). CAMS-modellen körs en gång per dygn, så
+                        prognosen uppdateras inte varje timme även om sidan hämtar ny data var 30:e minut
+                        (bara när fliken är öppen).
                     </p>
                     <p>
                         Källa:{' '}

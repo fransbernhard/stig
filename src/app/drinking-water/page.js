@@ -1,4 +1,6 @@
-import { fetchDrinkingWaterData, DISPLAY_PARAMS } from '@/lib/drinking-water'
+import { readFile } from 'fs/promises'
+import { join } from 'path'
+import { DISPLAY_PARAMS } from '@/lib/drinking-water'
 import DrinkingWaterCard from '@/components/DrinkingWaterCard'
 import s from './DrinkingWaterPage.module.scss'
 
@@ -79,18 +81,17 @@ function ZoneSection({ report, zoneName }) {
     )
 }
 
-export const revalidate = 86400
-export const preferredRegion = 'arn1'
+async function getDrinkingWaterData() {
+    try {
+        const raw = await readFile(join(process.cwd(), 'drinking-water.json'), 'utf8')
+        return JSON.parse(raw)
+    } catch {
+        return null
+    }
+}
 
 export default async function DrinkingWaterPage() {
-    let data = null
-    let error = null
-
-    try {
-        data = await fetchDrinkingWaterData()
-    } catch (e) {
-        error = e.message
-    }
+    const data = await getDrinkingWaterData()
 
     const { sodra, nordvastra } = data ?? {}
     const primaryReport = sodra ?? nordvastra
@@ -104,7 +105,7 @@ export default async function DrinkingWaterPage() {
                 <h1 className={s['DrinkingWaterPage__Title']}>Dricksvatten i Stockholm</h1>
             </header>
 
-            {error || !hasData ? (
+            {!hasData ? (
                 <p className={s['DrinkingWaterPage__Empty']}>Kunde inte ladda dricksvattendata. Prova igen senare.</p>
             ) : (
                 <>

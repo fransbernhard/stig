@@ -10,8 +10,15 @@ export default function WaterCard({ bathingWater, adviceAgainstBathing, abnormal
         ...(abnormalSituations ?? []).map((a) => a.description),
     ].filter(Boolean).filter((r, i, arr) => arr.indexOf(r) === i)
 
+    // Read by WaterSearch to filter the server-rendered list
+    const searchText = [bathingWater.name, municipality, type].filter(Boolean).join(' ').toLowerCase()
+
     return (
-        <li className={`${s.WaterCard} ${hasAdvisory ? s['WaterCard--Warn'] : s['WaterCard--Ok']}`}>
+        <li
+            className={`${s.WaterCard} ${hasAdvisory ? s['WaterCard--Warn'] : s['WaterCard--Ok']}`}
+            data-search={searchText}
+            data-advisory={hasAdvisory || undefined}
+        >
             <div className={s['WaterCard__Row']}>
                 <span className={s['WaterCard__Dot']} aria-hidden="true" />
                 <div className={s['WaterCard__Body']}>

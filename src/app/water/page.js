@@ -12,8 +12,6 @@ async function getWaterData() {
     }
 }
 
-export const revalidate = 86400
-
 export default async function WaterPage() {
     const data = await getWaterData()
     const sites = data?.sites ?? []
@@ -27,14 +25,13 @@ export default async function WaterPage() {
                 <h1 className={s['WaterPage__Title']}>Badplatser i Stockholms län</h1>
                 <p className={s['WaterPage__Subtitle']}>
                     Avrådan rapporteras av kommunerna till Havs- och vattenmyndigheten.
-                    Datan hämtas automatiskt varje natt kl. 00:00
-                    {fetchedAt && <> — senast uppdaterad <strong>{fetchedAt}</strong></>}.
+                    {fetchedAt && <>{' '}Senast uppdaterad <strong>{fetchedAt}</strong>.</>}
                 </p>
             </header>
 
             {sites.length === 0 ? (
                 <p className={s['WaterPage__Empty']}>
-                    Ingen data tillgänglig — kör workflow manuellt i GitHub Actions för att hämta första gången.
+                    Ingen data tillgänglig — kör <code>npm run fetch-data</code> för att hämta.
                 </p>
             ) : (
                 <WaterList sites={sites} />

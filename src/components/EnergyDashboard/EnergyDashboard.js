@@ -1,9 +1,51 @@
-'use client'
-
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
+import { niceScale } from '@/lib/chart'
 import s from './EnergyDashboard.module.scss'
 
 const STEP_COLORS = ['#6366f1', '#8b5cf6', '#a78bfa']
+
+const CHART = { width: 320, height: 160, top: 8, right: 8, bottom: 20, left: 34, maxBar: 80, radius: 4 }
+
+// Plain SVG, rendered at build time — this component ships no JS
+function EnergyChart({ data }) {
+    const { width, height, top, right, bottom, left, maxBar, radius } = CHART
+    const plotW = width - left - right
+    const plotH = height - top - bottom
+    const { max, ticks } = niceScale(Math.max(0, ...data.map((d) => d.energy)))
+
+    const slot = plotW / Math.max(data.length, 1)
+    const barW = Math.min(maxBar, slot * 0.8)
+    const y = (v) => top + plotH - (v / max) * plotH
+
+    return (
+        <svg className={s['EnergyDashboard__Svg']} viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Energi per fas i joule">
+            {ticks.map((t) => (
+                <text key={t} x={left - 6} y={y(t)} className={s['EnergyDashboard__Tick']} textAnchor="end" dominantBaseline="middle">
+                    {t}
+                </text>
+            ))}
+            {data.map((d, i) => {
+                const cx = left + slot * i + slot / 2
+                const x0 = cx - barW / 2
+                const y0 = y(d.energy)
+                const r = Math.min(radius, barW / 2, top + plotH - y0)
+                const base = top + plotH
+                return (
+                    <g key={d.label}>
+                        <path
+                            d={`M${x0},${base} V${y0 + r} Q${x0},${y0} ${x0 + r},${y0} H${x0 + barW - r} Q${x0 + barW},${y0} ${x0 + barW},${y0 + r} V${base} Z`}
+                            fill={STEP_COLORS[i % STEP_COLORS.length]}
+                        >
+                            <title>{`${d.label}: ${d.energy} J`}</title>
+                        </path>
+                        <text x={cx} y={height - 4} className={s['EnergyDashboard__Label']} textAnchor="middle">
+                            {d.label}
+                        </text>
+                    </g>
+                )
+            })}
+        </svg>
+    )
+}
 
 export default function EnergyDashboard({ data }) {
     const steps = (data.steps ?? []).filter(Boolean)
@@ -48,30 +90,7 @@ export default function EnergyDashboard({ data }) {
 
             <div className={s['EnergyDashboard__Chart']}>
                 <p className={s['EnergyDashboard__ChartTitle']}>Energy per phase (J)</p>
-                <ResponsiveContainer width="100%" height={160}>
-                    <BarChart data={chartData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
-                        <XAxis
-                            dataKey="label"
-                            tick={{ fontSize: 11, fill: '#9ca3af' }}
-                            axisLine={false}
-                            tickLine={false}
-                        />
-                        <YAxis
-                            tick={{ fontSize: 10, fill: '#9ca3af' }}
-                            axisLine={false}
-                            tickLine={false}
-                        />
-                        <Tooltip
-                            contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e5e7eb' }}
-                            formatter={(v) => [`${v} J`, 'Energy']}
-                        />
-                        <Bar dataKey="energy" radius={[4, 4, 0, 0]} maxBarSize={80}>
-                            {chartData.map((_, i) => (
-                                <Cell key={i} fill={STEP_COLORS[i % STEP_COLORS.length]} />
-                            ))}
-                        </Bar>
-                    </BarChart>
-                </ResponsiveContainer>
+                <EnergyChart data={chartData} />
             </div>
 
             <div className={s['EnergyDashboard__Table']}>

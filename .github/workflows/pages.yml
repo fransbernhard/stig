@@ -1,9 +1,17 @@
-name: CI energy
-on: [push, workflow_dispatch]
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [ "develop", "master" ]
+  workflow_dispatch:
 permissions:
   contents: write
-
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
 jobs:
+  # One build that is both measured (eco-ci) and deployed, instead of building twice
   build:
     runs-on: ubuntu-latest
     steps:
@@ -40,6 +48,11 @@ jobs:
           label: next build
           json-output: "true"
 
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out/
+
+      # Committed for the next deploy — the site always shows the previous run's measurement
       - name: Save energy data
         env:
           BUILD_JSON: ${{ steps.measure-build.outputs.data-lap-json }}
@@ -64,5 +77,17 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
           git add energy.json
-          git diff --staged --quiet || git commit -m "chore: update energy metrics [skip ci]"
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: update energy metrics [skip ci]"
+          git pull --rebase
           git push
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

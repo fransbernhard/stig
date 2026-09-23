@@ -4,8 +4,13 @@ import crypto from 'crypto'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+const isProd = process.env.NODE_ENV === 'production'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'export',
+    basePath: isProd ? '/stig' : '',
+    images: { unoptimized: true },
     sassOptions: {
         includePaths: [join(__dirname, 'src')],
     },
