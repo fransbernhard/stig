@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { niceScale } from '@/lib/chart'
+import { useElementWidth } from '@/lib/useElementWidth'
 import s from './EnergyDashboard.module.scss'
 
 // Written into the export by the deploy workflow after the build is measured
@@ -9,11 +10,12 @@ const ENERGY_URL = `${process.env.NEXT_PUBLIC_BASE_PATH}/energy.json`
 
 const STEP_COLORS = ['#6366f1', '#8b5cf6', '#a78bfa']
 
-const CHART = { width: 320, height: 160, top: 8, right: 8, bottom: 20, left: 34, maxBar: 80, radius: 4 }
+const CHART = { height: 160, top: 8, right: 8, bottom: 20, left: 34, maxBar: 80, radius: 4 }
 
 // Plain SVG instead of a chart library
 function EnergyChart({ data }) {
-    const { width, height, top, right, bottom, left, maxBar, radius } = CHART
+    const [wrapperRef, width] = useElementWidth(320)
+    const { height, top, right, bottom, left, maxBar, radius } = CHART
     const plotW = width - left - right
     const plotH = height - top - bottom
     const { max, ticks } = niceScale(Math.max(0, ...data.map((d) => d.energy)))
@@ -23,33 +25,35 @@ function EnergyChart({ data }) {
     const y = (v) => top + plotH - (v / max) * plotH
 
     return (
-        <svg className={s['EnergyDashboard__Svg']} viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Energi per fas i joule">
-            {ticks.map((t) => (
-                <text key={t} x={left - 6} y={y(t)} className={s['EnergyDashboard__Tick']} textAnchor="end" dominantBaseline="middle">
-                    {t}
-                </text>
-            ))}
-            {data.map((d, i) => {
-                const cx = left + slot * i + slot / 2
-                const x0 = cx - barW / 2
-                const y0 = y(d.energy)
-                const r = Math.min(radius, barW / 2, top + plotH - y0)
-                const base = top + plotH
-                return (
-                    <g key={d.label}>
-                        <path
-                            d={`M${x0},${base} V${y0 + r} Q${x0},${y0} ${x0 + r},${y0} H${x0 + barW - r} Q${x0 + barW},${y0} ${x0 + barW},${y0 + r} V${base} Z`}
-                            fill={STEP_COLORS[i % STEP_COLORS.length]}
-                        >
-                            <title>{`${d.label}: ${d.energy} J`}</title>
-                        </path>
-                        <text x={cx} y={height - 4} className={s['EnergyDashboard__Label']} textAnchor="middle">
-                            {d.label}
-                        </text>
-                    </g>
-                )
-            })}
-        </svg>
+        <div ref={wrapperRef}>
+            <svg className={s['EnergyDashboard__Svg']} width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Energi per steg i joule">
+                {ticks.map((t) => (
+                    <text key={t} x={left - 6} y={y(t)} className={s['EnergyDashboard__Tick']} textAnchor="end" dominantBaseline="middle">
+                        {t}
+                    </text>
+                ))}
+                {data.map((d, i) => {
+                    const cx = left + slot * i + slot / 2
+                    const x0 = cx - barW / 2
+                    const y0 = y(d.energy)
+                    const r = Math.min(radius, barW / 2, top + plotH - y0)
+                    const base = top + plotH
+                    return (
+                        <g key={d.label}>
+                            <path
+                                d={`M${x0},${base} V${y0 + r} Q${x0},${y0} ${x0 + r},${y0} H${x0 + barW - r} Q${x0 + barW},${y0} ${x0 + barW},${y0 + r} V${base} Z`}
+                                fill={STEP_COLORS[i % STEP_COLORS.length]}
+                            >
+                                <title>{`${d.label}: ${d.energy} J`}</title>
+                            </path>
+                            <text x={cx} y={height - 4} className={s['EnergyDashboard__Label']} textAnchor="middle">
+                                {d.label}
+                            </text>
+                        </g>
+                    )
+                })}
+            </svg>
+        </div>
     )
 }
 
