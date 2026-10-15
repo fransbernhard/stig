@@ -21,16 +21,21 @@ const CHART_COLORS = {
     carbon_monoxide: '#64748b',
 }
 
+// Kept between visits to the page, so navigating back doesn't fetch again
+let cached = null
+
 export default function Page() {
-    const [data, setData] = useState(null)
+    const [data, setData] = useState(cached?.data ?? null)
     const [error, setError] = useState(null)
-    const [updatedAt, setUpdatedAt] = useState(null)
+    const [updatedAt, setUpdatedAt] = useState(cached?.at ?? null)
 
     const load = useCallback(async () => {
+        if (cached && Date.now() - cached.at.getTime() < REFRESH_INTERVAL_MS) return
         try {
             const result = await fetchAirQuality()
-            setData(result)
-            setUpdatedAt(new Date())
+            cached = { data: result, at: new Date() }
+            setData(cached.data)
+            setUpdatedAt(cached.at)
             setError(null)
         } catch (e) {
             setError(e.message)
@@ -68,6 +73,18 @@ export default function Page() {
         return (
             <main className={s.AirPage}>
                 <p className={s['AirPage__Loading']}>Laddar…</p>
+                <noscript>
+                    <p className={s['AirPage__NoScript']}>
+                        Luftdatan hämtas direkt från Open-Meteo när sidan öppnas, och det kräver JavaScript. Du
+                        hittar samma prognos på{' '}
+                        <a href="https://open-meteo.com/en/docs/air-quality-api?latitude=59.33&longitude=18.07">
+                            open-meteo.com
+                        </a>
+                        .
+                    </p>
+                    {/* Hide the loading text, since nothing will load */}
+                    <style>{`.${s['AirPage__Loading']} { display: none; }`}</style>
+                </noscript>
             </main>
         )
     }

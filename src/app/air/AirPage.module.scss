@@ -75,4 +75,14 @@
         padding: 4rem 2rem;
         font-size: 14px;
     }
+
+    &__NoScript {
+        padding: 4rem 2rem;
+        max-width: 52ch;
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+    }
 }

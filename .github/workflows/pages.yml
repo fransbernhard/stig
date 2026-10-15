@@ -2,6 +2,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ "develop" ]
+    # Changes that don't affect the site shouldn't cost a build
+    paths-ignore:
+      - "**.md"
+      - ".editorconfig"
+      - ".prettierrc"
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,6 +34,14 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      # Reuse Next's compile cache so unchanged code isn't rebuilt from scratch
+      - uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: next-${{ hashFiles('package-lock.json') }}-${{ hashFiles('src/**', 'next.config.mjs') }}
+          restore-keys: |
+            next-${{ hashFiles('package-lock.json') }}-
 
       - name: Measure install
         id: measure-install
