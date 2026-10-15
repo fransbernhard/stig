@@ -1,12 +1,12 @@
-// Semantic colors
-$color-success: #15803d;
-$color-warning: #e17426;
-$color-error:   #b91c1c;
-$color-muted:   #8a7060;
+// Semantic colors — point at the custom properties in globals.scss so they follow dark mode
+$color-success: var(--success);
+$color-warning: var(--warning);
+$color-error:   var(--error);
+$color-muted:   var(--muted);
 
 // Borders
-$border-light:  #e8ddd5;
-$border-dark:   #e8ddd5;
+$border-light:  var(--border);
+$border-dark:   var(--border);
 
 // Breakpoints
 $bp-sm:  560px;

@@ -36,4 +36,4 @@ Then commit the changed files.
 
 ## Deploy
 
-Pushing to `develop` builds and deploys to GitHub Pages.
+Pushing to `develop` builds and deploys to GitHub Pages. The deploy stops if any page weighs more than 220 kB gzipped (`npm run budget` after a build to check locally).

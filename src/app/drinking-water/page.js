@@ -2,7 +2,10 @@ import { readFile } from 'fs/promises'
 import { join } from 'path'
 import { DISPLAY_PARAMS } from '@/lib/drinking-water'
 import DrinkingWaterCard from '@/components/DrinkingWaterCard'
+import { pageMetadata } from '@/lib/site'
 import s from './DrinkingWaterPage.module.scss'
+
+export const metadata = pageMetadata('/drinking-water')
 
 function computeStatus(params) {
     const results = []

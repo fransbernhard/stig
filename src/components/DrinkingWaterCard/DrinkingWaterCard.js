@@ -19,7 +19,7 @@ export default function DrinkingWaterCard({
                     <p className={s['DrinkingWaterCard__Label']}>{label}</p>
                     <span className={s['DrinkingWaterCard__Category']}>{category}</span>
                 </div>
-                <p className={s['DrinkingWaterCard__Value']} style={{ color: notDetected ? '#15803d' : '#f87171' }}>
+                <p className={s['DrinkingWaterCard__Value']} style={{ color: notDetected ? 'var(--success)' : 'var(--error)' }}>
                     {notDetected ? 'Ej påvisad' : 'Påvisad'}
                 </p>
                 <p className={s['DrinkingWaterCard__Limit']}>Gränsvärde: får ej påvisas</p>
@@ -38,7 +38,7 @@ export default function DrinkingWaterCard({
                     <p className={s['DrinkingWaterCard__Label']}>{label}</p>
                     <span className={s['DrinkingWaterCard__Category']}>{category}</span>
                 </div>
-                <p className={s['DrinkingWaterCard__Value']} style={{ color: inRange ? '#15803d' : '#f87171' }}>
+                <p className={s['DrinkingWaterCard__Value']} style={{ color: inRange ? 'var(--success)' : 'var(--error)' }}>
                     {valueRaw ?? '—'}
                     {unit && <span className={s['DrinkingWaterCard__Unit']}> {unit}</span>}
                 </p>
@@ -66,7 +66,7 @@ export default function DrinkingWaterCard({
                     <div className={s['DrinkingWaterCard__BarTrack']}>
                         <div
                             className={s['DrinkingWaterCard__BarFill']}
-                            style={{ width: `${pct}%`, background: barColor(pct) }}
+                            style={{ transform: `scaleX(${pct / 100})`, background: barColor(pct) }}
                         />
                     </div>
                     <p className={s['DrinkingWaterCard__PctLabel']}>{Math.round(pct)}% av gränsvärdet</p>

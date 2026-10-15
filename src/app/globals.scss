@@ -1,10 +1,27 @@
 :root {
+    color-scheme: light dark;
     --background: #faf7f4;
     --foreground: #1a1410;
     --surface: #ffffff;
     --border: #e8ddd5;
     --muted: #8a7060;
     --accent: #e17426;
+    --success: #15803d;
+    --warning: #e17426;
+    --error: #b91c1c;
+}
+
+// Dark pixels draw less power on OLED screens
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #15110e;
+        --foreground: #f3ece6;
+        --surface: #1f1915;
+        --border: #382d26;
+        --muted: #a8927f;
+        --success: #4ade80;
+        --error: #f87171;
+    }
 }
 
 html,

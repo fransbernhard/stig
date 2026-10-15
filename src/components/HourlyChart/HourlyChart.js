@@ -74,7 +74,7 @@ export default function HourlyChart({ data, color = '#6366f1', label, unit, who,
 
                     {nowIdx >= 0 && (
                         <g>
-                            <line x1={x(nowIdx)} x2={x(nowIdx)} y1={PAD.top} y2={PAD.top + PLOT_H} stroke="#111827" strokeDasharray="3 3" />
+                            <line x1={x(nowIdx)} x2={x(nowIdx)} y1={PAD.top} y2={PAD.top + PLOT_H} style={{ stroke: 'var(--foreground)' }} strokeDasharray="3 3" />
                             <text x={x(nowIdx)} y={PAD.top - 6} className={s['HourlyChart__NowLabel']} textAnchor="middle">
                                 Nu
                             </text>

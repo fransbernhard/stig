@@ -1,5 +1,8 @@
 import EnergyDashboard from '@/components/EnergyDashboard'
+import { pageMetadata } from '@/lib/site'
 import s from './EnergyPage.module.scss'
+
+export const metadata = pageMetadata('/energy')
 
 export default function EnergyPage() {
     return (

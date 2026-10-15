@@ -1,42 +1,42 @@
 export const AQI_LEVELS = [
     {
         max: 20,
-        label: 'Good',
+        label: 'Bra',
         color: '#4ade80',
         bg: '#f0fdf4',
         text: '#166534',
     },
     {
         max: 40,
-        label: 'Fair',
+        label: 'Godtagbar',
         color: '#a3e635',
         bg: '#f7fee7',
         text: '#3f6212',
     },
     {
         max: 60,
-        label: 'Moderate',
+        label: 'Måttlig',
         color: '#facc15',
         bg: '#fefce8',
         text: '#854d0e',
     },
     {
         max: 80,
-        label: 'Poor',
+        label: 'Dålig',
         color: '#fb923c',
         bg: '#fff7ed',
         text: '#9a3412',
     },
     {
         max: 100,
-        label: 'Very Poor',
+        label: 'Mycket dålig',
         color: '#f87171',
         bg: '#fef2f2',
         text: '#991b1b',
     },
     {
         max: Infinity,
-        label: 'Extremely Poor',
+        label: 'Extremt dålig',
         color: '#c084fc',
         bg: '#faf5ff',
         text: '#6b21a8',
@@ -60,15 +60,15 @@ export const POLLUTANTS = [
 ]
 
 export const POLLEN = [
-    { key: 'birch_pollen', label: 'Birch' },
-    { key: 'alder_pollen', label: 'Alder' },
-    { key: 'grass_pollen', label: 'Grass' },
+    { key: 'birch_pollen', label: 'Björk' },
+    { key: 'alder_pollen', label: 'Al' },
+    { key: 'grass_pollen', label: 'Gräs' },
 ]
 
 export function pollenLevel(value) {
     if (value == null) return { label: '—', color: '#9ca3af' }
-    if (value < 10) return { label: 'Low', color: '#4ade80' }
-    if (value < 100) return { label: 'Moderate', color: '#facc15' }
-    if (value < 1000) return { label: 'High', color: '#fb923c' }
-    return { label: 'Very High', color: '#f87171' }
+    if (value < 10) return { label: 'Låg', color: '#4ade80' }
+    if (value < 100) return { label: 'Måttlig', color: '#facc15' }
+    if (value < 1000) return { label: 'Hög', color: '#fb923c' }
+    return { label: 'Mycket hög', color: '#f87171' }
 }

@@ -35,14 +35,14 @@
 
     &__NowLabel {
         font-size: 10px;
-        fill: #111827;
+        fill: var(--foreground);
     }
 
     &__Hit {
         fill: transparent;
 
         &:hover {
-            fill: rgba(0, 0, 0, 0.04);
+            fill: rgba(128, 128, 128, 0.08);
         }
     }
 }

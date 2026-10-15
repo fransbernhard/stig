@@ -11,7 +11,7 @@ $mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, Consolas, monosp
     position: sticky;
     top: 0;
     z-index: 10;
-    background: #fff;
+    background: var(--surface);
     border-bottom: 1px solid $border-light;
 
     &__Container {
@@ -28,7 +28,7 @@ $mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, Consolas, monosp
         display: flex;
         align-items: center;
         gap: 0.45rem;
-        color: #000;
+        color: var(--foreground);
         font-size: 12px;
         font-weight: 700;
         font-family: $mono;
@@ -52,7 +52,8 @@ $mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, Consolas, monosp
     &__FlameTrack {
         display: flex;
         flex-direction: column;
-        animation: roll-up 1.2s linear infinite;
+        // A few loops, then stop — decoration shouldn't run for the whole visit
+        animation: roll-up 1.2s linear 3;
 
         @media (prefers-reduced-motion: reduce) {
             animation: none;
@@ -76,7 +77,7 @@ $mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, Consolas, monosp
     &__Link {
         font-size: 12px;
         font-family: $mono;
-        color: #000;
+        color: var(--foreground);
         padding: 0.35rem 0.65rem;
         border-radius: 0.4rem;
 

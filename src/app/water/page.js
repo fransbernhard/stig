@@ -1,7 +1,10 @@
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 import WaterList from '@/components/WaterList'
+import { pageMetadata } from '@/lib/site'
 import s from './WaterPage.module.scss'
+
+export const metadata = pageMetadata('/water')
 
 async function getWaterData() {
     try {

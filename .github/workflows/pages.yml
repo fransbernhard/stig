@@ -48,6 +48,9 @@ jobs:
           label: next build
           json-output: "true"
 
+      # Fails the deploy if a page grows past the weight budget
+      - run: npm run budget
+
       - id: pages
         uses: actions/configure-pages@v5
 

@@ -17,13 +17,13 @@ export default function PollutantCard({ label, value, unit, who }) {
                 <div className={s['PollutantCard__BarTrack']}>
                     <div
                         className={s['PollutantCard__BarFill']}
-                        style={{ width: `${pct}%`, background: barColor }}
+                        style={{ transform: `scaleX(${pct / 100})`, background: barColor }}
                     />
                 </div>
             )}
             {who && (
                 <p className={s['PollutantCard__Who']}>
-                    WHO guideline: {who} {unit}
+                    WHO:s riktvärde: {who} {unit}
                 </p>
             )}
         </div>
